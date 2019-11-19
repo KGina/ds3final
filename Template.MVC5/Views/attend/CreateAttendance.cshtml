@@ -1,0 +1,290 @@
+﻿@model List<AbantwanaWebMaster.Model.LearnerAssessment>
+
+@{
+    //Layout = null;
+    ViewBag.Title = "register";
+}
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/base/jquery-ui.css" type="text/css" media="all">
+
+<body onload="loz()">
+    <h2>Attendance Recording </h2>
+
+    @using (Html.BeginForm("CreateAttendance", "attend", FormMethod.Post))
+    {
+        //@Html.AntiForgeryToken()
+
+        <div class="form-group">
+
+            <div class="col-md-10">
+
+                @*@Html.DisplayName("Attendance date")
+                @Html.TextBox("dateCreated", "This is value", new { @class = "form-control datepicker", id = "dtp1" })*@
+                @*  @Html.DropDownList("assessmentId", null, htmlAttributes: new { @class = "form-control" })*@
+                <input class="form-control"
+                       id="dateCreated"
+                       name="dateCreated"
+                       type="date"
+                       value="" />
+                @*@Html.ValidationMessageFor(model => model., "", new { @class = "text-danger" })*@
+            </div>
+
+            <div class="col-md-10">
+                @*@Html.DisplayNameFor(model => model.orderTypeId)*@
+                @*@Html.DropDownList("orderTypeId", null, htmlAttributes: new { @class = "form-control" })*@
+                @*@Html.ValidationMessageFor(model => model.orderTypeId, "", new { @class = "text-danger" })*@
+            </div>
+
+            <table class="table">
+                <tr>
+
+
+                    <th>
+                        @Html.DisplayName("Learner Name")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Surname")
+                    </th>
+
+
+                    <th>
+                        @Html.DisplayName("Absent/Present")
+                    </th>
+
+                </tr>
+
+
+                @for (int i = 0; i < Model.Count(); i++)
+                {
+                    <tr>
+
+
+                        @Html.HiddenFor(model => model[i].learnerId)
+                        @*@Html.HiddenFor(m=>item.lv.Add(item))*@
+                        <td>
+                            @Html.DisplayFor(model => model[i].Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model[i].Surname)
+                        </td>
+                        @*/ @Html.HiddenFor(model=> item.lv.Add(item))*@
+
+                        <td>
+                            @Html.CheckBoxFor(model => model[i].present)
+                        </td>
+                         <td>
+                            @Html.DisplayFor(model => model[i].classID)
+                        </td>
+
+
+                    </tr>
+                }
+
+            </table>
+
+            @*@Html.DisplayFor(modelItem => item.SupplierId)
+                @Html.DisplayFor(modelItem => item.orderTypeId)
+
+                @Html.DisplayFor(modelItem => item.totalCost)*@
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Submit attendance" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>*@
+
+    @*<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>*@
+    @*<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />*@
+    <script>
+        $(function () {
+            $("#dateCreated").datepicker({
+                beforeShowDay: schoolHolidayz
+            });
+        });
+        function loz() {
+            schoolLoader(); holidaysloader();
+        }
+
+        var publHoli_Arrytitle = [];
+        var publHoli_Arrystart = [];
+        var schoolHolidayz = [];
+        var weekendArry = [];
+        //$('#dateCreated').datetimepicker({
+        //    format: 'MM/DD/YYYY HH:mm A',
+        //    disabledDates: [new]
+        //});
+        function sch(dates) {
+            dates.forEach(function (date) {
+                //console.log(date)
+                if (date.getDay() == 6 || date.getDay() == 0) {
+                    weekendArry.push(stripDate(date));
+                }
+                i = 0;
+                var h = false;
+                publHoli_Arrystart.forEach(function () {
+                    //alert(start);
+                    if (stripDate(date) == publHoli_Arrystart[i]) {
+                        h = true;
+                    };
+                    i++;
+                });
+                c = 0;
+                weekendArry.forEach(function () {
+                    //alert(start);
+                    if (stripDate(date) == weekendArry[c]) {
+                        h = true;
+                    };
+                    c++;
+                });
+                if (h == false) {
+                    schoolHolidayz.push(stripDate(date));
+                }
+            });
+        }
+        function schoolLoader() {
+
+            schoolHolidayz.length = 0;
+            getDates.length = 0;
+            var dr = new Date('2019/03/16');
+            //Term 1 Holidays
+            var dates = getDates(new Date(dr.getFullYear(), 2, 16), new Date(2019, 3, 1));
+
+            sch(dates);
+            //Term 2 Holidays
+            dates = getDates(new Date(2019, 05, 15), new Date(2019, 06, 08));
+            sch(dates);
+            //Term 3 Holidays
+            dates = getDates(new Date(2019, 08, 19), new Date(2019, 08, 30));
+            sch(dates);
+            //Term 4 Holidays
+            dates = getDates(new Date(2019, 11, 05), new Date(2019, 11, 31));
+            sch(dates);
+
+        }
+
+        var getDates = function (startDate, endDate) {
+            var dates = [],
+                currentDate = startDate,
+                addDays = function (days) {
+                    var date = new Date(this.valueOf());
+                    date.setDate(date.getDate() + days);
+                    return date;
+                };
+            while (currentDate <= endDate) {
+                dates.push(currentDate);
+                currentDate = addDays.call(currentDate, 1);
+            }
+            return dates;
+        };
+
+        function holidaysloader() {
+            //  publHoli_Arrytitle.push("New Year's Day");
+            publHoli_Arrystart.push('2019-01-01');
+
+
+            // publHoli_Arrytitle.push("Human Rights Day");
+            publHoli_Arrystart.push('2019-03-27');
+
+            // publHoli_Arrytitle.push("Good Friday");
+            publHoli_Arrystart.push('2019-04-19');
+
+            // publHoli_Arrytitle.push("Family Day");
+            publHoli_Arrystart.push('2019-04-22');
+
+            // publHoli_Arrytitle.push("Freedom Day");
+            publHoli_Arrystart.push('2019-04-27');
+
+            // publHoli_Arrytitle.push("Worker's Day");
+            publHoli_Arrystart.push('2019-05-01');
+
+            publHoli_Arrytitle.push("Elections");
+            publHoli_Arrystart.push('2019-05-08');
+
+            //  publHoli_Arrytitle.push("Youth Day");
+            publHoli_Arrystart.push('2019-06-16');
+
+            //  publHoli_Arrytitle.push("Public Holiday Day");
+            publHoli_Arrystart.push('2019-06-17');
+
+            //  publHoli_Arrytitle.push("National Women's Day");
+            publHoli_Arrystart.push('2019-08-09');
+
+            // publHoli_Arrytitle.push("Heritage day");
+            publHoli_Arrystart.push('2019-09-24');
+
+            /// publHoli_Arrytitle.push("Day Of Reconciliation");
+            publHoli_Arrystart.push('2019-12-16');
+
+            /// publHoli_Arrytitle.push("Christmas Day");
+            publHoli_Arrystart.push('2019-12-25');
+
+            //publHoli_Arrytitle.push("Day Of Goodwill");
+            publHoli_Arrystart.push('2019-12-26');
+
+            // publHoli_Arrytitle.push("New Year's eve");
+            publHoli_Arrystart.push('2019-12-31');
+
+            // publHoli_Arrytitle.push("New Year's Day");
+            publHoli_Arrystart.push('2020-01-01');
+
+            publHoli_Arrytitle.push("Human Rights Day");
+            publHoli_Arrystart.push('2020-03-27');
+
+            //  publHoli_Arrytitle.push("Good Friday");
+            publHoli_Arrystart.push('2020-04-10');
+
+            //  publHoli_Arrytitle.push("Family Day");
+            publHoli_Arrystart.push('2020-04-13');
+
+            // publHoli_Arrytitle.push("Freedom Day");
+            publHoli_Arrystart.push('2020-04-27');
+
+            // publHoli_Arrytitle.push("Worker's Day");
+            publHoli_Arrystart.push('2020-05-01');
+
+            //  publHoli_Arrytitle.push("Elections");
+            publHoli_Arrystart.push('2020-05-08');
+
+            // publHoli_Arrytitle.push("Youth Day");
+            publHoli_Arrystart.push('2020-06-16');
+
+            //publHoli_Arrytitle.push("Public Holiday Day");
+            publHoli_Arrystart.push('2020-06-17');
+
+            // publHoli_Arrytitle.push("National Women's Day");
+            publHoli_Arrystart.push('2020-08-09');
+
+            // publHoli_Arrytitle.push("Heritage day");
+            publHoli_Arrystart.push('2020-09-24');
+
+            ///publHoli_Arrytitle.push("Day Of Reconciliation");
+            publHoli_Arrystart.push('2020-12-16');
+
+            ///.push("Christmas Day");
+            publHoli_Arrystart.push('2020-12-25');
+
+            // publHoli_Arrytitle.push("Day Of Goodwill");
+            publHoli_Arrystart.push('2020-12-26');
+
+            // publHoli_Arrytitle.push("New Year's Eve");
+            publHoli_Arrystart.push('2020-12-31');
+
+        }
+        function stripDate(ds) {
+            var d = new Date(ds),
+                y = d.getFullYear(),
+                m = addZero(d.getMonth() + 1),
+                d = addZero(d.getDate());
+            return y + '-' + m + '-' + d;
+        }
+        function addZero(v) {
+            if (v < 10) return '0' + v;
+            return v;
+        }
+    </script>
+</body>

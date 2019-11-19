@@ -1,0 +1,208 @@
+﻿@model IEnumerable<AbantwanaWebMaster.Model.subjectReport>
+@{
+    ViewBag.Title = "IndexById";
+    Layout = null;
+}
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+
+
+
+
+<html>
+<head>
+    <style>
+        h3, h2 {
+            text-align: center;
+        }
+        body {
+            background-color: antiquewhite;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: black;
+        }
+
+        h3 {
+            background-color: #4CAF50;
+            color: black;
+        }
+
+        p.dashed {
+            border-style: dashed;
+        }
+
+    </style>
+</head>
+<body>
+  
+
+       
+    <div>
+        @*<h2><img src="~/Images/basiceducation.jpg" alt="School Logo" style="width:500px;height:100px;"></h2>*@
+        <img src="~/Images/logo2.png" alt="School Logo" style="width:100%;">
+        <h2><img src="~/Images/logos.png" alt="School Logo" style="width:100%;height:150px;"></h2>
+
+
+
+
+
+        <table class="table table-bordered table-condensed table-striped">
+
+           
+
+
+            @*<img src="img_girl.jpg" alt="Girl in a jacket" style="width:500px;height:600px;">*@
+
+        </table>
+        @foreach (var item in Model)
+        {
+            <table class="table table-bordered table-condensed table-striped">
+                <tr>
+                    <td>
+                        
+                        <table class="table table-bordered table-condensed table-striped">
+
+                            <center><h4><b>Grade @item.grade / @item.name / @item.year / Term @item.termNumber </b></h4></center>
+                            <center><h4><b>Requirement @item.requirement</b></h4></center>
+                            <tr>
+                                <th></th>
+                                @foreach (var hj in item.assess)
+                                {
+                                    <th>@hj.assessmentName</th>
+
+                                }
+
+                                <th>Total</th>
+                                <th>Result</th>
+                                @*<td>@Model.Salary</td>*@
+                            </tr>
+                            <tr>
+                                <td>Weighting</td>
+                                @foreach (var hj in item.assess)
+                                {
+
+
+
+                                    <td>@hj.weightings</td>
+                                }
+                                <td>@item.wetotal</td>
+                            </tr>
+                            <tr>
+                                <td>Total Mark</td>
+                                @foreach (var hj in item.assess)
+                                {
+
+
+
+                                    <td>@hj.totMark</td>
+                                }
+                                <td>@item.total</td>
+                            </tr>
+
+                           
+
+                            @foreach (var ite in item.learnerAssessment)
+                            {
+                                <tr>
+                                    <td>@ite.name</td>
+                                    @foreach (var io in ite.mark)
+                                    {
+                                        <td>@io</td>
+                                    }
+                                    <td>@ite.total</td>
+                                    <td>@ite.result</td>
+                                </tr>
+                            }
+
+                        </table>
+
+                    </td>
+                </tr>
+
+
+
+            </table>
+        }
+        </div>
+       
+
+        <br>
+        <br>
+        <table class="table table-bordered table-condensed table-striped">
+            <tr>
+                <th>
+                    <center>Grade Scale</center>
+                </th>
+            </tr>
+            <tr>
+
+                <td>
+                    <table class="table table-bordered table-condensed table-striped">
+
+
+                        <tr>
+                            <td>Percentages</td>
+
+                            <td>Level</td>
+                            @*<td>@Model.Salary</td>*@
+                        </tr>
+                        <tr>
+                            <td>(80-100) Excellent</td>
+                            <td>A</td>
+
+                        </tr>
+                        <tr>
+                            <td>(70-79) Good</td>
+                            <td>B</td>
+
+                        </tr>
+                        <tr>
+                            <td>(60-69) Satisfactory</td>
+                            <td>C</td>
+                        </tr>
+                        <tr>
+                            <td>(50-59) Adaquate</td>
+                            <td>D</td>
+                        </tr>
+                        <tr>
+                            <td>(40-49) Poor</td>
+                            <td>E</td>
+                        </tr>
+                        <tr>
+                            <td>(0-39) Not Performed</td>
+                            <td>F</td>
+                        </tr>
+                    </table>
+
+
+                    <h2><img src="~/Images/Reportd.png" alt="School Logo" style="width:100%;height:100px;"></h2>
+                </td>
+
+            </tr>
+
+
+        </table>
+
+
+  
+    //</p>
+    </body>
+</html>
+
+
+

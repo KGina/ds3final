@@ -1,0 +1,132 @@
+﻿@model List<AbantwanaWebMaster.Model.LearnerAssessment>
+
+@{
+    ViewBag.Title = "CaptureMark";
+}
+@*<script src="~/Scripts/jquery-3.2.1.js"></script>*@
+<script src="~/Scripts/jquery-3.1.1.js"></script>
+<h2>Capture Marks </h2>
+<div class="btn-group">
+    <a class="btn btn-default" href="@Url.Action("Index", "Assessment", new { subjectId=ViewBag.subjectId,gradeId= ViewBag.gradeId,yearId=ViewBag.yearId,termId=ViewBag.termId},null)">
+        <span class="icon_lightbulb_alt"></span>
+        Assessment Lists
+    </a>
+</div>
+
+
+
+<div class="card-header card-header-primary">
+    <h4 class="card-title ">
+        <i></i><a href="#">Grade @ViewBag.className /</a>
+        <i></i>@ViewBag.subjectName /
+        <i></i>@ViewBag.year /
+        <i></i>Term @ViewBag.name /
+        <i></i>@ViewBag.assname
+    </h4>
+</div>
+@using (Html.BeginForm("CaptureMark", "assessment", FormMethod.Post))
+{
+    //@Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+        <table class="table">
+            <tr>
+
+
+                <th>
+                    @Html.DisplayName("Learner Number")
+                </th>
+                <th>
+                    @Html.DisplayName("Name")
+                </th>
+                <th>
+                    @Html.DisplayName("Surname")
+                </th>
+
+
+                <th>
+                    @Html.DisplayName("Mark")
+                </th>
+
+            </tr>
+
+
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+                <tr>
+
+
+                    @Html.HiddenFor(model => model[i].learnerId)
+                    @Html.HiddenFor(model => model[i].yearId)
+                    @Html.HiddenFor(model => model[i].assessmentId)
+                    @Html.HiddenFor(model => model[i].classID)
+                    @Html.HiddenFor(model => model[i].gradeid)
+                    @Html.HiddenFor(model => model[i].subjectId)
+                    @Html.HiddenFor(model => model[i].Name)
+                    @Html.HiddenFor(model => model[i].Surname)
+
+                    <td>
+                        @Html.DisplayFor(model => model[i].learnerId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model[i].Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model[i].Surname)
+                    </td>
+
+
+                    <td>
+                        @Html.EditorFor(model => model[i].AssessmentMark)
+                    </td>
+
+
+                </tr>
+            }
+
+        </table>
+
+        @*@Html.DisplayFor(modelItem => item.SupplierId)
+            @Html.DisplayFor(modelItem => item.orderTypeId)
+
+            @Html.DisplayFor(modelItem => item.totalCost)*@
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Submit Marks" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    function bs_input_file() {
+        $(".input-file").before(
+            function () {
+                if (!$(this).prev().hasClass('input-ghost')) {
+                    var element = $("<input type='file' id='dataFile' name='upload' class='input-ghost' style='visibility:hidden; height:0'>");
+                    element.attr("name", $(this).attr("name"));
+                    element.change(function () {
+                        element.next(element).find('input').val((element.val()).split('\\').pop());
+                    });
+                    $(this).find("button.btn-choose").click(function () {
+                        element.click();
+                    });
+                    $(this).find("button.btn-reset").click(function () {
+                        element.val(null);
+                        $(this).parents(".input-file").find('input').val('');
+                    });
+                    $(this).find('input').css("cursor", "pointer");
+                    $(this).find('input').mousedown(function () {
+                        $(this).parents('.input-file').prev().click();
+                        return false;
+                    });
+                    return element;
+                }
+            }
+        );
+    }
+</script>

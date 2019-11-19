@@ -1,0 +1,192 @@
+﻿
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page -ABANTWANA</title>
+    <link href="/Content/bootstrap-darkly.css" rel="stylesheet">
+    <link href="/Content/site.css" rel="stylesheet">
+    <link href="~/Content200/Content/bootstrap-darkly.css" rel="stylesheet"
+    <link href="~/Content200/Content/Site.css" rel="stylesheet" />
+    <script src="/Scripts/modernizr-2.6.2.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+
+</head>
+<body @*bgcolor="blue"*@>
+    <style>
+        body {
+            background-size: cover;
+            background-image: url('../../Content/books-oct16.jpg');
+        }
+
+        .navbar-inverse {
+            background-color: rgba(0,0,0,0.5)
+        }
+
+            .navbar-inverse .navbar-nav > li > a:hover,
+            .navbar-inverse .navbar-nav > li > a:focus {
+                background-color: orange;
+            }
+
+        .big-img {
+            height: 325px;
+            object-fit: cover;
+        }
+
+        .header-font {
+            font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
+            color: #fd1506;
+        }
+
+        .fa-facebook {
+            color: #3b5998;
+        }
+
+        .fa-linkedin {
+            color: #0077B5;
+        }
+
+        .fa-twitter {
+            color: #4099FF;
+        }
+
+        .fa-google {
+            color: #d34836;
+        }
+
+        .bg-primary {
+            background-color: #000 !important;
+        }
+
+        .bg-circle {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            padding: 14px 4px;
+            color: #ececec;
+            text-align: center;
+            border-radius: 50%;
+        }
+
+        .bg-circle-outline {
+            width: 50px;
+            height: 50px;
+            color: smoke;
+            padding: 8px 2px;
+            border: 2px solid;
+            border-color: smoke;
+            border-radius: 50%;
+        }
+
+
+        .bg-circle a, a:hover, .media a:focus {
+            text-decoration: none !important;
+            outline: none;
+            color: #ececec;
+        }
+
+        .bg-circle-outline a, a:hover, .media a:focus {
+            text-decoration: none !important;
+            outline: none;
+            color: #ececec;
+        }
+
+        .footer {
+            background: #EDEFF1;
+            height: auto;
+            padding-bottom: 30px;
+            position: relative;
+            width: 100%;
+            border-bottom: 1px solid #CCCCCC;
+            border-top: 1px solid #DDDDDD;
+            position: fixed;
+        }
+
+            .footer p {
+                margin: 0;
+            }
+
+            .footer img {
+                max-width: 100%;
+            }
+
+            .footer h3 {
+                border-bottom: 1px solid #BAC1C8;
+                color: #54697E;
+                font-size: 18px;
+                font-weight: 600;
+                line-height: 27px;
+                padding: 40px 0 10px;
+                text-transform: uppercase;
+            }
+
+            .footer ul {
+                font-size: 13px;
+                list-style-type: none;
+                margin-left: 0;
+                padding-left: 0;
+                margin-top: 15px;
+                color: #7F8C8D;
+            }
+
+                .footer ul li a {
+                    padding: 0 0 5px 0;
+                    display: block;
+                }
+
+            .footer a {
+                color: #78828D
+            }
+
+        body {
+            background-size: cover;
+            background-image: url('../../images/laptop_cup_glasses_plant_114948_2938x1953.jpg');
+        }
+    </style>
+    <style>
+        background {
+            background-image: url("Content/11.jpg");
+        }
+    </style>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        @*<img class="pull-left" src="~/Content/icon.PNG" />*@
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @*<li>@Html.ActionLink("About", "About", "Home")</li>*@
+                    <li><a data-modal="" href="@Url.Action("index","Home")"><i class="fa fa-home"></i>  Home</a></li>
+
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+
+    <div>  @RenderBody()</div>
+
+</body>
+
+</html>
+<script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/5bd8bcb365224c2640516c7b/default';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
+    })();
+</script>
+<!--End of Tawk.to Script-->
+</section>

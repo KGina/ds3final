@@ -1,0 +1,51 @@
+﻿<html lang="en">
+@{
+//Layout = null;
+}
+
+<link rel="stylesheet" href="./W3.CSS_files/w3.css">
+<link rel="stylesheet" href="./W3.CSS_files/css">
+<link rel="stylesheet" href="./W3.CSS_files/css(1)">
+<link rel="stylesheet" href="~/Content/assets/scss/">
+<link rel="stylesheet" href="./W3.CSS_files/font-awesome.min.css">
+<script src="./W3.CSS_files/hm.js.download"></script>
+<script>var _hmt = _hmt || [];
+(function() {
+var hm = document.createElement("script");
+hm.src = "//hm.baidu.com/hm.js?73c27e26f610eb3c9f3feb0c75b03925";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+})();</script>
+<style>
+    body, html {
+        height: 100%;
+    }
+
+    .bg {
+        /* The image used */
+        background-image: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(11).jpg");
+        /* Half height */
+        height: 100%;
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+<body>
+
+    <div class="bg">
+        <div class="justify-content-center">
+            <div class="col-lg-12 text-center col-sm-12">
+                <h1 class="mb-4" data-aos="fade-up" data-aos-delay="100">Your Request Was Successfully </h1>
+                <h1 class="mb-4" data-aos="fade-up" data-aos-delay="100">
+    @Html.ActionLink("Home", "Index","Home")
+</h1>
+            </div>
+        </div>
+        
+    </div>
+
+
+
+</body>

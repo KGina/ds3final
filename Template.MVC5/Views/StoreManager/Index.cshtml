@@ -1,0 +1,203 @@
+﻿@model IEnumerable<AbantwanaWebMaster.Model.Item>
+@{
+    ViewBag.Title = "Index";
+
+}
+<link href="~/Content/StyleSheet2.css" rel="stylesheet" />
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+<script src="/Scripts/jquery-1.4.4.min.js"
+        type="text/javascript"></script>
+
+<html>
+<head>
+    @using GridMvc.Html
+    @{
+        var grid = new WebGrid(Model);
+    }
+
+    <meta name="viewport" content="width=device-width" />
+    <link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" />
+    @*@*<link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" />*@
+    <script src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/gridmvc.min.js")"></script>
+
+
+    @*<link href="~/Content/bootstrap.css" rel="stylesheet" />
+        <link href="~/Content/Gridmvc.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script src="~/Scripts/gridmvc.min.js"></script>
+
+        <link href="~/Content/viewlight.css" rel="stylesheet" />*@
+
+
+
+    <style>
+        .webgrid-table {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            font-size: 1.2em;
+            width: 100%;
+            display: table;
+            border-collapse: separate;
+            border: solid 1px #98BF21;
+            background-color: white;
+        }
+
+            .webgrid-table td, th {
+                border: 1px solid #98BF21;
+                padding: 3px 7px 2px;
+            }
+    </style>
+</head>
+<body>
+    <center>
+        <div style="background-color:whitesmoke; height:37px;width:85% ;font-size:15px;">
+
+            <h2> Iterm List </h2>
+
+        </div>
+
+
+        <div class="card shadow mb-4" style="background-color:aliceblue; width:85%; top:auto">
+            <div class="card-header ">
+
+                <p>
+                    <div class="btn-group">
+                        <a class="btn btn-send" href="@Url.Action("Index", "StoreManager")">
+                            <i class="fad fa fa-home"></i>
+                            Home
+                        </a>
+                    </div>
+                    <div class="btn-group">
+                        <a class="btn btn-success" href="@Url.Action("Create", "StoreManager")">
+                            <i class="fad fa-file-alt"></i>
+                            Add New Item
+                        </a>
+                    </div>
+                    <div class="btn-group">
+                        <a class="btn btn-primary" href="@Url.Action("Index", "Categories")">
+                            <i class="fa fa-list"></i>
+                            Item Categories
+                        </a>
+                    </div>
+                    <div class="btn-group">
+                        <a class="btn btn-warning" href="@Url.Action("Index", "Store")">
+                            <i class="fa fa-shopping-cart"></i>
+                            Store
+                        </a>
+                    </div>
+                </p>
+
+            </div>
+
+
+            @*<div class="table-responsive">*@
+
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayName("Catergory")
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.ItemName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ItemDesciption)
+                    </th>
+                    <th>
+                        Action
+                    </th>
+
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.catergoryName)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ItemName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ItemDesciption)
+                        </td>
+                        <td>
+                            <button style="background-color:orangered;width:55%;height:3%" id="hi" onclick="arch(@item.ItemId)"> Archive</button>
+
+                           
+                        </td>
+                    </tr>
+                }
+            </table>
+
+
+
+        </div>
+
+
+        </div>
+
+    </center>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Gridmvc.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/gridmvc.min.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+    <script>
+        function arch(id) {
+            if (confirm('Are you sure?')) {
+                $.ajax({
+                    type: 'POST',
+                    url: "/StoreManager/DeleteConfirmed",
+                    data: { 'id': id }, //Used to send data through HTTP request POST
+                    success: function (data) {
+                        if (data.status == true) {  //refresh calender if success
+                            alert("Succefully Archived");
+                        }
+                    },
+                    error: function () {
+                        alert('Failed to Archived Item!')
+                    }
+                })
+            }
+        }
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("myBtn").style.display = "block";
+            } else {
+                document.getElementById("myBtn").style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+</body>
+</html>

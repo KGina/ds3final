@@ -1,0 +1,200 @@
+﻿@model IEnumerable<AbantwanaWebMaster.Model.learnerReport>
+@{
+    ViewBag.Title = "IndexById";
+    Layout = null;
+}
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+
+
+
+
+<html>
+<head>
+    <style>
+        h3, h2 {
+            text-align: center;
+        }
+        body {
+            background-color: antiquewhite;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: black;
+        }
+
+        h3 {
+            background-color: #4CAF50;
+            color: black;
+        }
+
+        p.dashed {
+            border-style: dashed;
+        }
+
+    </style>
+</head>
+<body>
+  
+
+        @foreach (var item in Model)
+        {
+    <div>
+        @*<h2><img src="~/Images/basiceducation.jpg" alt="School Logo" style="width:500px;height:100px;"></h2>*@
+        <img src="~/Images/logo2.png" alt="School Logo" style="width:100%;">
+        <h2><img src="~/Images/logos.png" alt="School Logo" style="width:100%;height:150px;"></h2>
+
+
+       
+        
+
+        <table class="table table-bordered table-condensed table-striped">
+            
+                <h3> <b align="right">  Personal Information</b></h3>
+                
+            
+            <tr>
+                <td>Learn Name :</td>
+                <td>@item.learnerName</td>
+            </tr>
+
+            <tr>
+                <td>Learner ID :</td>
+                <td>@item.learnerId</td>
+
+            </tr>
+            <tr>
+                <td>Term Number :</td>
+                <td>@item.termNumber</td>
+
+            </tr>
+            <tr>
+                <td>Grade :</td>
+                <td>@item.grade</td>
+
+            </tr>
+            <tr>
+                <td>Tearcher :</td>
+                <td>@item.teacher</td>
+
+            </tr>
+
+            @*<img src="img_girl.jpg" alt="Girl in a jacket" style="width:500px;height:600px;">*@
+
+        </table>
+        <table class="table table-bordered table-condensed table-striped">
+            <tr>
+                <td>
+                    <table class="table table-bordered table-condensed table-striped">
+
+                        <center><h4><b>@item.year Learner Report</b></h4></center>
+                        <tr>
+                            <th>Subject Name</th>
+                            <th>Marks</th>
+                            <th>Average</th>
+                            <th>Comments</th>
+                            @*<td>@Model.Salary</td>*@
+                        </tr>
+                        @foreach (var ite in item.learnerSubjects)
+                        {
+                            <tr>
+                                <td>@ite.Name</td>
+                                <td>@ite.mark</td>
+                                <td>@ite.average</td>
+                                <td>@ite.comment</td>
+                                @*<td>@Model.HRA</td>*@
+                            </tr>
+                        }
+
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>Number Of Days Absent :</td>
+
+            </tr>
+            <tr>
+                <td>Result : @item.results</td>
+            </tr>
+
+        </table>
+        <br>
+        <br>
+        <table class="table table-bordered table-condensed table-striped">
+            <tr>
+                <th>
+                    <center>Grade Scale</center>
+                </th>
+            </tr>
+            <tr>
+
+                <td>
+                    <table class="table table-bordered table-condensed table-striped">
+
+
+                        <tr>
+                            <td>Percentages</td>
+
+                            <td>Level</td>
+                            @*<td>@Model.Salary</td>*@
+                        </tr>
+                        <tr>
+                            <td>(80-100) Excellent</td>
+                            <td>A</td>
+
+                        </tr>
+                        <tr>
+                            <td>(70-79) Good</td>
+                            <td>B</td>
+
+                        </tr>
+                        <tr>
+                            <td>(60-69) Satisfactory</td>
+                            <td>C</td>
+                        </tr>
+                        <tr>
+                            <td>(50-59) Adaquate</td>
+                            <td>D</td>
+                        </tr>
+                        <tr>
+                            <td>(40-49) Poor</td>
+                            <td>E</td>
+                        </tr>
+                        <tr>
+                            <td>(0-39) Not Performed</td>
+                            <td>F</td>
+                        </tr>
+                    </table>
+                   
+                    
+                    <h2><img src="~/Images/Reportd.png" alt="School Logo" style="width:100%;height:100px;"></h2>
+                </td>
+
+            </tr>
+
+
+        </table>
+
+
+    </div>
+        }
+    </p>
+    </body>
+</html>
+
+
+

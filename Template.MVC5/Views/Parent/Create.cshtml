@@ -1,0 +1,179 @@
+﻿@model AbantwanaWebMaster.Model.ParentView
+
+@{
+    ViewBag.Title = "Create";
+    //Layout = null;
+}
+<html>
+<head>
+
+</head>
+<style>
+
+    .container {
+        position: relative;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+
+    h3 {
+        color: darkblue;
+        font-weight: bold;
+    }
+
+
+    h3 {
+        font-style: oblique;
+    }
+
+    hr.new4 {
+        border: 3px solid black;
+    }
+</style>
+
+
+
+<body>
+    <center>
+        @*<div class="container-fluid" style="background-color:black">*@
+        <div style="background-color:">
+
+            <div class="card shadow mb-4" style="background-color: ; width:70%">
+                <div class="card-header ">
+                    <div style=" font-size:15px;">
+
+                        <div style="background-color:white; height:37px;width:100% ;font-size:15px;">
+
+                            <h2> Parent Registration </h2>
+                           
+                        </div>
+
+                        <hr class="new4">
+                    </div>
+                </div>
+              
+                <div class="container">
+
+                    <div class="content" style="text-align:left">
+            
+
+                        @using (Html.BeginForm("Create", "Parent", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.surname, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.surname, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.surname, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.dob, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.dob, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.dob, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.phonenumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.phonenumber, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.phonenumber, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.physicaladdress, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.physicaladdress, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.physicaladdress, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.emailaddress, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.emailaddress, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.emailaddress, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.homephonenumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.homephonenumber, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.homephonenumber, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <b>All documents are required</b><u style="color:blue"></u>(Must be certified and not older than 3months)
+                            <h4>
+
+                                <div class="form-group">
+                                    @*@Html.LabelFor(model => model.proofofresidence, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                    <div class="col-md-10">
+
+                                        Proof of Residence
+                                        <input type="file" name="proofofresidence" id="proofofresidence" accept=".pdf" />
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @*@Html.LabelFor(model => model.IdDocument, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                    <div class="col-md-10">
+
+                                        ID Document
+                                        <input type="file" name="IdDocument" id="IdDocument" accept=".pdf" />
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Save" class="btn btn-success" style="width: 120px;" />
+                                    </div>
+                                </div>
+                            </h4>
+                        </div>
+                        }
+
+                        <div>
+                            @Html.ActionLink("Back to List", "Index")
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+    </center>
+
+
+   
+
+
+
+</body>
+</html>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,35 @@
+﻿@model AbantwanaWebMaster.Model.Item
+@{
+    ViewBag.Title = "Item - " + Model.ItemName;
+}
+
+
+
+
+<div>
+
+
+    <h1>@Model.ItemName</h1>
+
+    <div id="item-details">
+        <p>
+            <em>Category:</em>
+            @Model.catergoryName
+        </p>
+
+        <p>
+        <p>
+            <em>Description:</em>
+            @Model.ItemDesciption
+        </p>
+        <em>Price:</em>
+        @String.Format("{0:F}",
+    Model.Price)
+        </p>
+
+
+        <a id="btn_add" href="@Url.Action("AddToCart", "ShoppingCart", new { id = Model.ItemId }, "")" class="btn btn-info btn-lg" style="margin-left:70px">
+            <span class="glyphicon glyphicon-shopping-cart"></span> Add To Cart
+        </a>
+    </div>
+</div>

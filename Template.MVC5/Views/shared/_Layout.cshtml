@@ -1,0 +1,509 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    @using System.Web.Optimization
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+
+        fieldset {
+            width: 90%;
+            border-bottom: 1px solid #b7b7b7;
+            margin-bottom: 15px;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        .link {
+            text-decoration: none;
+        }
+
+        .tabs {
+            padding-top: 2%;
+            margin-left: 15%;
+        }
+
+            .tabs span {
+                display: inline-block;
+                padding-right: 4px;
+            }
+
+        strong span {
+            display: inline-block;
+            padding-right: 6px;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width" />
+
+    <title>ONSKOOL</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
+    <meta name="author" content="GeeksLabs">
+    <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <link href="~/Content1/AdminLayout/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content1/AdminLayout/css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Content1/AdminLayout/css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="~/Content1/AdminLayout/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content1/AdminLayout/css/widgets.css" rel="stylesheet" />
+    <link href="~/Content1/AdminLayout/css/style.css" rel="stylesheet" />
+    <link href="~/Content1/AdminLayout/css/style-responsive.css" rel="stylesheet" />
+    @*<link href="~/Content1/AdminLayout/css/xcharts.min.css" rel="stylesheet" />*@
+    @*<link href="~/Content1/AdminLayout/css/jquery-ui-1.10.4.min.css" rel="stylesheet" />*@
+    @*<link href="~/Content1/AdminLayout/assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
+        <link href="~/Content1/AdminLayout/assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />*@
+    <link href="~/Content1/AdminLayout/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" />
+    @*<link href="~/Content1/AdminLayout/assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />*@
+    @*<link href="~/Content1/AdminLayout/css/jquery-jvectormap-1.2.2.css" rel="stylesheet" />*@
+    <link href="~/Content1/AdminLayout/css/owl.carousel.css" rel="stylesheet" />
+
+</head>
+<body>
+    <header class="header dark-bg">
+        <!----=============================================-->
+
+        <div class="top-nav notification-row">
+            <ul class="nav pull-right top-menu">
+
+                @if (User.IsInRole("Parent"))
+                {
+                    <li id="alert_notificatoin_bar" class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="icon-bell-l"></i>
+                            <span class="badge bg-important"> @Html.Partial("_AnnouncementCounter")</span>
+                        </a>
+                        <ul class="dropdown-menu extended notification">
+                            @*<div class="notify-arrow notify-arrow-blue"></div>*@
+                            <li>
+                                <p class="blue">You have (@Html.Partial("_AnnouncementCounter")) New Announcements</p>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("pIndex", "Announcement")">
+                                    <span class="label label-danger"><i class="icon_book_alt"></i></span>
+                                    View all Announcements
+
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                }
+                @if (User.IsInRole("admin"))
+                {
+                    <li id="alert_notificatoin_bar" class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="icon-bell-l"></i>
+                            <span class="badge bg-important"> @Html.Partial("_LeaveRequestCounter")</span>
+                        </a>
+                        <ul class="dropdown-menu extended notification">
+
+                            <li>
+                                <p class="blue">You have (@Html.Partial("_LeaveRequestCounter"))Total leave requests</p>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("index", "Leave")">
+                                    <span class="label label-danger"><i class="icon_book_alt"></i></span>
+                                    View all Leave requests
+
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        @{Html.RenderAction("CartSummary", "ShoppingCart");}
+                    </li>
+                }
+                <li>
+                    @Html.Partial("_LoginPartial")
+                </li>
+
+                @if (User.IsInRole("Teacher"))
+                {
+                    <li>
+                        @{Html.RenderAction("CartSummary", "ShoppingCart");}
+                    </li>
+                }
+                <!--=====================Notification=====================-->
+                <!--=====================/Notification=====================-->
+            </ul>
+        </div>
+        <!----=============================================-->
+        <div class="toggle-nav">
+            <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
+        </div>
+        <div style="margin-top:20px">
+            UserName : @User.Identity.Name
+        </div>
+    </header>
+    <div>
+        <!--sidebar start-->
+        <aside>
+            <div id="sidebar" class="nav-collapse ">
+                <!-- sidebar menu start-->
+                <ul class="sidebar-menu">
+                    <li class="active">
+                        <a href="">
+                            <i class="icon_house_alt"></i>
+                            <span>ONSKOOL</span>
+                        </a>
+                    </li>
+                    @*<li class="sub-menu">
+            <a href="javascript:;" class="">
+                <i class="icon_mail"></i>
+                <span>Inbox</span>
+                <span class="menu-arrow arrow_carrot-right"></span>
+            </a>
+            <ul class="sub">
+                <li>@Html.ActionLink("My Inbox", "AllMessages", "EmailUs")</li>
+                <li><a href="https://salesiq.zoho.com/semicolon/index#portal/mycurrent">Chat</a></li>
+                <li></li>
+            </ul>
+        </li>*@
+                    @if (User.IsInRole("admin"))
+                    {
+
+                        <li class="sub-menu">
+                            <a href="javascript:;" class="">
+                                <i class="fa fa-users"></i>
+                                <span>Staff</span>
+                                <span class="menu-arrow arrow_carrot-right"></span>
+                            </a>
+                            <ul class="sub">
+                                <li>@Html.ActionLink("Create Staff Member", "Create", "StaffMembers")</li>
+                                <li>@Html.ActionLink("Staff Members", "Index", "StaffMembers")</li>
+
+
+
+                                <li></li>
+                            </ul>
+                        </li>
+                        <li class="sub-menu">
+                            <a href="javascript:;" class="">
+                                <i class="fa fa-edit"></i>
+                                <span>Applications</span>
+                                <span class="menu-arrow arrow_carrot-right"></span>
+                            </a>
+                            <ul class="sub">
+                                <li>@Html.ActionLink("Create Parent", "Create", "Parent")</li>
+                                <li>@Html.ActionLink("View Parent", "Index", "Parent")</li>
+                                <li>@Html.ActionLink("Approved Learners", "AllApproved", "LearnerProfile")</li>
+                                <li>@Html.ActionLink("Rejected Learners", "ReJectedLearners", "LearnerProfile")</li>
+                                <li>@Html.ActionLink("Archived Learners", "ArchiveLearners", "LearnerProfile")</li>
+
+                            </ul>
+                        </li>
+                        <li class="sub-menu">
+                            <a href="javascript:;" class="">
+                                <i class="fa fa-calendar"></i>
+                                <span>Schedule</span>
+                                <span class="menu-arrow arrow_carrot-right"></span>
+                            </a>
+                            <ul class="sub">
+                                <li>@Html.ActionLink("Timetable", "Index", "Schedule")</li>
+                                <li>@Html.ActionLink("View Leave", "Index", "Leave")</li>
+                                <li>@Html.ActionLink("Leave Types", "Index", "LeaveTypes")</li>
+                                <li>@Html.ActionLink("Theme Colors", "Index", "ThemeColor")</li>
+                                @*<li>@Html.ActionLink("Modify Roster", "Create", "Rosters")</li>*@
+                                <li></li>
+                            </ul>
+                        </li>
+
+                        <li class="sub-menu">
+                            <a href="javascript:;" class="">
+                                <i class="fa fa-university"></i>
+                                <span>Classroom</span>
+                                <span class="menu-arrow arrow_carrot-right"></span>
+                            </a>
+                            <ul class="sub">
+                                <li>@Html.ActionLink("Grade", "Index", "Grade")</li>
+                                <li>@Html.ActionLink("Clasroom", "Index", "Classroom")</li>
+                                <li>@Html.ActionLink("Attendance", "selectClassroom", "attend")</li>
+                                @*<li></li>*@
+                            </ul>
+                        </li>
+
+                        <li class="sub-menu">
+                            <a href="javascript:;" class="">
+                                <i class="icon_table"></i>
+                                <span>Web Chat</span>
+                                <span class="menu-arrow arrow_carrot-right"></span>
+                            </a>
+                            <ul class="sub">
+                                <li>@Html.ActionLink("Chat Room", "Chat", "Home")</li>
+                                @*<li>@Html.ActionLink("Modify Roster", "Create", "Rosters")</li>*@
+                                <li></li>
+                            </ul>
+                        </li>
+                        
+
+                        <li class="sub-menu">
+                            <a href="javascript:;" class="">
+                                <i class="fa fa-bell"></i>
+                                <span>Announcement</span>
+                                <span class="menu-arrow arrow_carrot-right"></span>
+                            </a>
+                            <ul class="sub">
+                                <li><a href="@Url.Action("AnnouncementReceipient", "Announcement")">By Student</a></li>
+                                <li><a href="@Url.Action("SendByGrade", "Announcement")">By Class</a></li>
+                                <li><a href="@Url.Action("index", "Announcement")">Announcements</a></li>
+
+                                <li></li>
+                            </ul>
+                        </li>
+
+                        <li class="sub-menu">
+                            <a href="javascript:;" class="">
+                                <i class="fa fa-folder"></i>
+                                <span>Marks </span>
+                                <span class="menu-arrow arrow_carrot-right"></span>
+                            </a>
+                            <ul class="sub">
+                                <li><a href="@Url.Action("Index", "Terms")">Term</a></li>
+                                <li><a href="@Url.Action("Index", "Year")"> Year</a></li>
+                                <li><a href="@Url.Action("Index", "Subject")">Subject</a></li>
+                                <li><a href="@Url.Action("subjectAllocation", "Subject")"> Subject Allocation</a></li>
+                                <li><a href="@Url.Action("GradeIndex", "Assessment")"> Grade</a></li>
+                                <li></li>
+                            </ul>
+                        </li>
+
+                        <li class="sub-menu">
+                            <a href="javascript:;" class="">
+                                <i class="fa fa-shopping-cart"></i>
+                                <span>Order </span>
+                                <span class="menu-arrow arrow_carrot-right"></span>
+                            </a>
+                            <ul class="sub">
+                                <li><a href="@Url.Action("Index", "Categories")"> Catergory</a></li>
+                                <li><a href="@Url.Action("Index", "StoreManager")"> Items</a></li>
+                                @*<li>@Html.ActionLink("Order ", "Browse", "Store")</li>*@
+                                <li><a href="@Url.Action("Index", "Suppliers")"> Supplier</a></li>
+                                <li><a href="@Url.Action("ArchiveSupplier", "Suppliers")">Archive Supplier</a></li>
+
+                                <li><a href="@Url.Action("Index", "order")"> Order Approval</a></li>
+                                <li><a href="@Url.Action("Index", "store")"> New Order</a></li>
+                            </ul>
+                        </li>
+                        <li class="sub-menu">
+                            <a href="javascript:;" class="">
+                                <i class="fa fa-book"></i>
+                                <span>Report</span>
+                                <span class="menu-arrow arrow_carrot-right"></span>
+                            </a>
+                            <ul class="sub">
+                                <li><a href="@Url.Action("GoToReport", "report")"> Reports</a></li>
+                            </ul>
+                        </li>
+
+
+                        <li>@Html.Partial("_LoginPartial")</li>
+
+                    }
+                    @if (User.IsInRole("Teacher"))
+                    {
+                        <li class="sub-menu">
+                            <a href="javascript:;" class="">
+                                <i class="icon_documents"></i>
+                                <span>Leave</span>
+                                <span class="menu-arrow arrow_carrot-right"></span>
+                            </a>
+                            <ul class="sub">
+                                <li>@Html.ActionLink("Create Leave Request", "CreateRequest", "Leave")</li>
+                                <li>@Html.ActionLink("My Leaves", "Teacherindex", "Leave")</li>
+                                <li></li>
+                            </ul>
+                        </li>
+                        <li class="sub-menu">
+                            <a href="javascript:;" class="">
+                                <i class="icon_documents"></i>
+                                <span>Announcement</span>
+                                <span class="menu-arrow arrow_carrot-right"></span>
+                            </a>
+                            <ul class="sub">
+                                <li>@Html.ActionLink("By Student", "AnnouncementReceipient", "Announcement")</li>
+                                <li>@Html.ActionLink("By Class", "SendByGrade", "Announcement")</li>
+                                @*<li>@Html.ActionLink("Announcement to Parent", "AnnouncementReceipient", "Announcement")</li>*@
+                                @*<li>@Html.ActionLink("Announcement to Class", "SendByGrade", "Announcement")</li>*@
+                                <li></li>
+                            </ul>
+                        </li>
+                        <li class="sub-menu">
+                            <a href="javascript:;" class="">
+                                <i class="icon_documents"></i>
+                                <span>Schedule</span>
+                                <span class="menu-arrow arrow_carrot-right"></span>
+                            </a>
+                            <ul class="sub">
+                                <li>@Html.ActionLink("My Schedule", "TeacherIndex", "schedule")</li>
+                                @* <li>@Html.ActionLink("By Class", "SendByGrade", "Announcement")</li>*@
+                                @*<li>@Html.ActionLink("Announcement to Parent", "AnnouncementReceipient", "Announcement")</li>*@
+                                @*<li>@Html.ActionLink("Announcement to Class", "SendByGrade", "Announcement")</li>*@
+                                <li></li>
+                            </ul>
+                        </li>
+                        <li class="sub-menu">
+                            <a href="javascript:;" class="">
+                                <i class="fa fa-folder"></i>
+                                <span>Marks Management</span>
+                                <span class="menu-arrow arrow_carrot-right"></span>
+                            </a>
+                            <ul class="sub">
+                                <li><a href="@Url.Action("Index", "Terms")">Term</a></li>
+                                <li><a href="@Url.Action("Index", "Year")"> Year</a></li>
+                                <li><a href="@Url.Action("Index", "Subject")">Subject</a></li>
+                                <li><a href="@Url.Action("subjectAllocation", "Subject")"> Subject Allocation</a></li>
+                                <li><a href="@Url.Action("GradeIndex", "Assessment")"> Grade</a></li>
+                                <li></li>
+                            </ul>
+                        </li>
+                        <li class="sub-menu">
+                            <a href="javascript:;" class="">
+                                <i class="fa fa-book"></i>
+                                <span>Report </span>
+                                <span class="menu-arrow arrow_carrot-right"></span>
+                            </a>
+                            <ul class="sub">
+                                <li><a href="@Url.Action("GoToReport", "report")"> Reports</a></li>
+
+                            </ul>
+                        </li>
+                    }
+                    @if (User.IsInRole("Parent"))
+                    {
+                        <li class="sub-menu">
+                            <a href="javascript:;" class="">
+                                <i class="icon_documents"></i>
+                                <span>Applications</span>
+                                <span class="menu-arrow arrow_carrot-right"></span>
+                            </a>
+                            <ul class="sub">
+                                <li>@Html.ActionLink("Add New Parent ", "CreateByParent", "parent")</li>
+                                <li>@Html.ActionLink("Add New Child ", "Create", "learnerProfile")</li>
+                                <li>@Html.ActionLink("My Child Info.", "parentIndex", "learnerProfile")</li>
+                                <li></li>
+                            </ul>
+                        </li>
+                        <li class="sub-menu">
+                            <a href="javascript:;" class="">
+                                <i class="icon_documents"></i>
+                                <span>Announcements</span>
+                                <span class="menu-arrow arrow_carrot-right"></span>
+                            </a>
+                            <ul class="sub">
+                                <li>@Html.ActionLink("View Announcements", "pIndex", "Announcement")</li>
+                                @*<li>@Html.ActionLink("Announcement to Class", "SendByGrade", "Announcement")</li>*@
+                                <li></li>
+                            </ul>
+                        </li>
+                        <li class="sub-menu">
+                            <a href="javascript:;" class="">
+                                <i class="icon_table"></i>
+                                <span>Web Chat</span>
+                                <span class="menu-arrow arrow_carrot-right"></span>
+                            </a>
+                            <ul class="sub">
+                                <li>@Html.ActionLink("Chat Room", "Chat", "Home")</li>
+                                @*<li>@Html.ActionLink("Modify Roster", "Create", "Rosters")</li>*@
+                                <li></li>
+                            </ul>
+                        </li>
+                    }
+                </ul>
+                <!-- sidebar menu end-->
+            </div>
+        </aside>
+        <!--sidebar end-->
+    </div>
+    <div class="container body-content">
+        <div style=" margin-bottom:10%"></div>
+        @RenderBody()
+        @*<hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Developed by ONSKOOL</p>
+            </footer>*@
+    </div>
+    @*<script src="~/Content1/AdminLayout/js/jquery.js"></script>*@
+    @* <script src="~/Content1/AdminLayout/js/jquery-ui-1.10.4.min.js"></script>*@
+    @*<script src="~/Content1/AdminLayout/js/jquery-1.8.3.min.js"></script>*@
+    <script src="~/Content1/AdminLayout/js/jquery-ui-1.9.2.custom.min.js"></script>
+    <script src="~/Content1/AdminLayout/js/bootstrap.min.js"></script>
+    <script src="~/Content1/AdminLayout/js/jquery.scrollTo.min.js"></script>
+    <script src="~/Content1/AdminLayout/js/jquery.nicescroll.js"></script>
+    <script src="~/Content1/AdminLayout/js/jquery.sparkline.js"></script>
+    <script src="~/Content1/AdminLayout/js/owl.carousel.js"></script>
+    <script src="~/Content1/AdminLayout/assets/jquery-knob/js/jquery.knob.js"></script>
+    <script src="~/Content1/AdminLayout/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
+    <script src="~/Content1/AdminLayout/js/jquery.slimscroll.min.js"></script>
+    <script src="~/Content1/AdminLayout/js/charts.js"></script>
+    <script src="~/Content1/AdminLayout/js/sparklines.js"></script>
+    <script src="~/Content1/AdminLayout/js/morris.min.js"></script>
+    <script src="~/Content1/AdminLayout/js/gdp-data.js"></script>
+    <script src="~/Content1/AdminLayout/js/jquery.placeholder.min.js"></script>
+    <script src="~/Content1/AdminLayout/js/jquery.autosize.min.js"></script>
+    <script src="~/Content1/AdminLayout/js/xcharts.min.js"></script>
+    @*<script src="~/Content1/AdminLayout/js/jquery-jvectormap-world-mill-en.js"></script>
+        <script src="~/Content1/AdminLayout/js/jquery-jvectormap-1.2.2.min.js"></script>*@
+    <script src="~/Content1/AdminLayout/js/easy-pie-chart.js"></script>
+    <script src="~/Content1/AdminLayout/js/sparkline-chart.js"></script>
+    <script src="~/Content1/AdminLayout/js/scripts.js"></script>
+    <script src="~/Content1/AdminLayout/js/jquery.customSelect.min.js"></script>
+    <script src="~/Content1/AdminLayout/js/jquery.rateit.min.js"></script>
+    @*<script src="~/Content1/AdminLayout/js/calendar-custom.js"></script>
+        <script src="~/Content1/AdminLayout/js/fullcalendar.min.js"></script>*@
+    @*<script src="~/Content1/AdminLayout/assets/fullcalendar/fullcalendar/fullcalendar.js"></script>*@
+    <script src="~/Content1/AdminLayout/assets/chart-master/Chart.js"></script>
+
+    <script>
+        //knob
+        $(function () {
+            $(".knob").knob({
+                'draw': function () {
+                    $(this.i).val(this.cv + '%')
+                }
+            })
+        });
+
+        //carousel
+        $(document).ready(function () {
+            $("#owl-slider").owlCarousel({
+                navigation: true,
+                slideSpeed: 300,
+                paginationSpeed: 400,
+                singleItem: true
+
+            });
+        });
+
+        //custom select box
+
+        $(function () {
+            $('select.styled').customSelect();
+        });
+
+        /* ---------- Map ---------- */
+        $(function () {
+            $('#map').vectorMap({
+                map: 'world_mill_en',
+                series: {
+                    regions: [{
+                        values: gdpData,
+                        scale: ['#000', '#000'],
+                        normalizeFunction: 'polynomial'
+                    }]
+                },
+                backgroundColor: '#eef3f7',
+                onLabelShow: function (e, el, code) {
+                    el.html(el.html() + ' (GDP - ' + gdpData[code] + ')');
+                }
+            });
+        });</script>
+</body>
+</html>

@@ -1,0 +1,306 @@
+﻿<!DOCTYPE html>
+<html>
+<title>Leave Request</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+@model PagedList.IPagedList<AbantwanaWebMaster.Model.LeaveRequest>
+@using PagedList.Mvc
+@using PagedList
+
+
+<html>
+<head>
+    @using GridMvc.Html
+    @{
+        var grid = new WebGrid(Model);
+    }
+
+    <meta name="viewport" content="width=device-width" />
+    <link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" />
+    @*@*<link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" />*@
+    <script src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/gridmvc.min.js")"></script>
+
+
+    @*<link href="~/Content/bootstrap.css" rel="stylesheet" />
+        <link href="~/Content/Gridmvc.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script src="~/Scripts/gridmvc.min.js"></script>
+
+        <link href="~/Content/viewlight.css" rel="stylesheet" />*@
+
+
+
+    <style>
+        .webgrid-table {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            font-size: 1.2em;
+            width: 100%;
+            display: table;
+            border-collapse: separate;
+            border: solid 1px #98BF21;
+            background-color: white;
+        }
+
+            .webgrid-table td, th {
+                border: 1px solid #98BF21;
+                padding: 3px 7px 2px;
+            }
+    </style>
+</head>
+<body>
+    <div style="background-color:whitesmoke; height:37px;width:100% ;font-size:15px;">
+
+        <h2> List of Leaves </h2>
+
+    </div>
+    <center>
+
+        <div class="card shadow mb-4" style="background-color:aliceblue; width:100%; top:auto">
+            <div class="card-header ">
+
+                <div style="background-color:white; height:50px; font-size:25px;">
+                    <i class="fa fa-home">
+                        <a href="@Url.Action("Index", "Parent")">
+                            Back
+                        </a>
+                    </i>
+                    <i class="fa fa-desktop">
+                        <a href="@Url.Action("Create", "Parent")">
+                            New
+                        </a>
+                    </i>
+                </div>
+            </div>
+
+
+            <div class="container-fluid">
+                <!-- Page Heading -->
+                <!-- DataTales Example -->
+
+                <div class="card-body">
+                    @*<div class="table-responsive">*@
+
+        
+                    <table class="table table-bordered" id="dataTable" width="100" cellspacing="0">
+                        <thead>
+                            <tr>
+
+
+                                <th>
+                                    <h4>     @Html.DisplayName("Leave Type")</h4>
+                                </th>
+
+                                <th>
+                                    <h4>     @Html.DisplayName("Start Date")</h4>
+                                </th>
+                                <th>
+                                    <h4>      @Html.DisplayName("End Date")</h4>
+                                </th>
+
+
+                                <th>
+                                    <h4>     @Html.DisplayName("Status")</h4>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+
+
+                                <th>
+                                    <h4>  @Html.DisplayName("Leave Type")</h4>
+                                </th>
+
+                                <th>
+                                    <h4>  @Html.DisplayName("Start Date")</h4>
+                                </th>
+                                <th>
+                                    <h4>  @Html.DisplayName("End Date")</h4>
+                                </th>
+
+
+                                <th>
+                                    <h4>  @Html.DisplayName("Status")</h4>
+                                </th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+
+
+                                    <td>
+                                        <h4>@Html.DisplayFor(modelItem => item.createdBy)</h4>
+                                    </td>
+
+                                    <td>
+                                        <h4>@Html.DisplayFor(modelItem => item.startdate)</h4>
+                                    </td>
+                                    <td>
+                                        <h4>@Html.DisplayFor(modelItem => item.enddate)</h4>
+                                    </td>
+
+
+                                    @*<td>
+                            @Html.DisplayFor(modelItem => item.createDate)
+                        </td>*@
+                                    <td>
+                                        <h4>  @Html.DisplayFor(modelItem => item.status)</h4>
+                                    </td>
+
+                                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Picture)
+                        </td>*@
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                 
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <br />
+        <div style="text-align: center">
+            <p>
+                @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            </p>
+            <p style="margin-top: -25px">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+            </p>
+        </div>
+
+
+
+        </div>
+        </div>
+        </div>
+
+    </center>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Gridmvc.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/gridmvc.min.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+@section scripts{
+
+
+
+    <script>
+        function stripDate(ds) {
+            var d = new Date(ds),
+                y = d.getFullYear(),
+                m = addZero(d.getMonth() + 1),
+                d = addZero(d.getDate());
+            return y + '/' + m + '/' + d;
+        }
+        function openAddEditForm(requestid) {
+            $('#reqID').val(requestid);
+            alert('my value is : ' + $('#reqID').val())
+            $.ajax({
+                type: "GET",
+                url: "/Leave/getStaffList",
+                data: { 'requestid': requestid },
+                success: function (data) {
+                    var select = document.getElementById('#ddClassRoom');
+                    $('#ddClassRoom').empty();
+                    $('#ddClassRoom').append($('<option></option>').val('').html('Select Teacher'));
+                    //For loop to get all events in database
+                    $.each(data, function (i, v) {
+
+                        $('#ddClassRoom').append($('<option></option>').val(v.staffMemberId).html(v.title));
+
+                    })
+                },
+                //Catch error of loading
+                error: function (error) {
+                    alert('Failed to Teachers!')
+                }
+
+            })
+
+        };
+        function approve(requestid) {
+            $.ajax({//Ajax is used for to call controller to get and post data.
+                type: 'POST',
+                url: '/Leave/approveLeave', //Call Controller
+                data: { 'requestid': requestid },
+                success: function (data) {
+                    if (data.status) {
+                        console.log("Data Saved");
+                        alert("Approved successful!!");
+                    }
+                    else {
+                        var r = confirm("No Teachers Available as replacement, Do you want to Update the Schedule!! ");
+                        if (r == true) {
+                            openAddEditForm(requestid);
+                            //Hides modal
+                            $('#eventClickModal').modal('hide');
+                            $('#eventAddModal').modal();
+                        }
+
+                    }
+                },
+                error: function () {
+                    alert('Failed to approve Leave!');
+                }
+            })
+        };
+        function editBtn(requestid) {
+            //Open modal window for edit form for selected event
+            approve(requestid);
+
+        };
+
+        $('#btnSave').click(function () {
+            if ($('#ddClassRoom').val() == 0) {
+                alert('Please Teacher!!')
+                return;
+            }
+            var data = {
+                staffMemberId: parseInt($('#ddClassRoom').val()),
+                requestid: $('#reqID').val()
+            }
+
+            replaceTeacher(data)
+
+        });
+        function replaceTeacher(data) {
+            $.ajax({//Ajax is used for to call controller to get and post data.
+                type: 'POST',
+                url: '/Leave/replaceTeacher', //Call Controller
+                data: data,
+                success: function (data) {
+                    if (data.status) {
+                        console.log("Data Saved");
+                        alert("Approved successful!!");
+                    }
+                    else {
+                        var r = confirm("No Teachers Available as replacement, Do you want to Update the Schedule!! ");
+                        if (r == true) {
+                            openAddEditForm(requestid);
+                            //Hides modal
+                            $('#eventClickModal').modal('hide');
+                            $('#eventAddModal').modal();
+                        }
+
+                    }
+                },
+                error: function () {
+                    alert('Failed to approve Leave!');
+                }
+            })
+        };
+    </script>
+}
+</html>

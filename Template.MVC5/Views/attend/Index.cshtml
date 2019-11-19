@@ -1,0 +1,48 @@
+﻿@model IEnumerable<AbantwanaWebMaster.Model.attendGradeReport>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Attendance List</h2>
+
+<p>
+    @Html.ActionLink("Back", "selectClassroom")
+</p>
+@foreach (var iteml in Model)
+{
+    @*@Html.HiddenFor(m=>)*@
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("learner name")
+            </th>
+            <th>
+                @Html.DisplayName("Days Absent")
+            </th>
+            <th>
+                @Html.DisplayName("Days Present")
+            </th>
+            
+        </tr>
+
+        @foreach (var item in iteml.attendanceReports)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.learnerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.daysAbseent)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.daysPresent)
+                </td>
+               
+                
+            </tr>
+        }
+        
+
+    </table>
+}

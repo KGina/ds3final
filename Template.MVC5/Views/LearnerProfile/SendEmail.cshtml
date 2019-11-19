@@ -1,0 +1,52 @@
+﻿@model AbantwanaWebMaster.Model.announce
+
+@{
+    ViewBag.Title = "SendEmail";
+    Layout = null;
+}
+
+<h1><font color="Purple" > <marquee>Email</marquee></font></h1>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div align ="center" class="form-group"><font color="Purple">
+    @Html.LabelFor(model => model.ToEmail, htmlAttributes: new { @class = "control-label col-md-5" })</font>
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.ToEmail, new { htmlAttributes = new { @class = "form-control"  } })
+                @Html.ValidationMessageFor(model => model.ToEmail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr/>
+
+        <div align="center" class="form-group"><font color="Purple">
+    @Html.LabelFor(model => model.EMailBody, htmlAttributes: new { @class = "control-label col-md-3" })</font>
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.EMailBody, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.EMailBody, "", new { @class = "text-danger" })
+    </div>
+</div>
+        <hr/>
+        <div align="center" class="form-group"><font color="Purple">
+    @Html.LabelFor(model => model.EmailSubject, htmlAttributes: new { @class = "control-label col-md-3" })</font>
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.EmailSubject, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.EmailSubject, "", new { @class = "text-danger" })
+    </div>
+</div>
+        <hr/>
+        <div align="center" class="form-group">
+            <div class="col-md-offset-3 col-md-10">
+                <input type="submit" value="SEND" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

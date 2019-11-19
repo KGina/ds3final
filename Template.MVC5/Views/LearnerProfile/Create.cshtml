@@ -1,0 +1,109 @@
+﻿@model AbantwanaWebMaster.Model.LearnerProfileView
+
+@{
+    ViewBag.Title = "Create";
+
+}
+
+<h2>Create Leaner Profile</h2>
+
+
+@using (Html.BeginForm("Create", "LearnerProfile", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.parentEmail)
+
+<div class="form-horizontal">
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.lname, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.lname, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.lname, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.lsurname, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.lsurname, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.lsurname, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.lidnumber, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.lidnumber, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.lidnumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.dateofbith, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.dateofbith, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.dateofbith, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.grade, htmlAttributes: new { @class = "control-label col-md-2" })
+
+        <div class="col-md-10">
+            @Html.DropDownList("grade", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.grade, "", new { @class = "text-danger" })
+        </div>
+
+
+
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.medicaldetails, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.medicaldetails, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.medicaldetails, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @* @Html.LabelFor(model => model.medicalCertificate, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <div class="col-md-10">
+            <h4>Medical Certificate</h4>
+            <input type="file" name="medicalCertificate" id="medicalCertificate" accept=".pdf" />
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.BirthCertificate, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <div class="col-md-10">
+            <h4>Birth Certificate</h4>
+            <input type="file" name="BirthCertificate" id="BirthCertificate" accept=".pdf" />
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Picture, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <h4>Select Picture</h4>
+            <input type="file" name="Picture" id="Picture" accept=".jpg" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

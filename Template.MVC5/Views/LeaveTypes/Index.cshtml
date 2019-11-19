@@ -1,0 +1,33 @@
+﻿@model IEnumerable<AbantwanaWebMaster.Model.LeaveType>
+
+@{
+    ViewBag.Title = "Leave Types";
+}
+
+<h2>Types of Leaves</h2>
+
+<p>
+    @Html.ActionLink("Add Type", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.typeName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.typeName)
+        </td>
+        <td>
+          
+           
+            <a href=@Url.Action("Delete", "LeaveTypes", new { id=item.leaveTypeID },null)> Delete</a>
+        </td>
+    </tr>
+}
+
+</table>

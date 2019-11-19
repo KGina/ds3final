@@ -1,0 +1,244 @@
+﻿@model AbantwanaWebMaster.Model.LeaveRequest
+
+//start
+
+<html>
+<head>
+
+</head>
+
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
+
+
+
+
+<style>
+
+    .container {
+        position: relative;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+
+    h3 {
+        color: darkblue;
+        font-weight: bold;
+    }
+
+    .w3-btn {
+        width: 150px;
+    }
+
+
+    #myBtn {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 30px;
+        z-index: 99;
+        font-size: 18px;
+        border: none;
+        outline: none;
+        background-color: blue;
+        color: white;
+        cursor: pointer;
+        padding: 15px;
+        border-radius: 4px;
+    }
+
+        #myBtn:hover {
+            background-color: #555;
+        }
+
+    a.mybtn {
+        background: red;
+        color: white;
+        display: inline-block;
+        padding: 6px 12px 6px 12px;
+        text-decoration: none;
+    }
+
+    h3 {
+        font-style: oblique;
+    }
+
+    hr.new4 {
+        border: 3px solid black;
+    }
+</style>
+
+
+
+<body>
+    <center>
+        @*<div class="container-fluid" style="background-color:black">*@
+        <div style="background-color:">
+
+            <div class="card shadow mb-4" style="background-color: ; width:70%">
+                <div class="card-header ">
+                    <div style=" font-size:15px;">
+
+                        <div style="background-color:white; height:37px;width:100% ;font-size:15px;">
+
+                            <h2> New Parent registration </h2>
+
+                        </div>
+
+                        <hr class="new4">
+                    </div>
+                </div>
+                <button onclick="topFunction()" id="myBtn" title="Go to top" style="width:5%">Top</button>
+                <div class="container">
+
+                    <div class="content" style="text-align:left">
+
+                        @using (Html.BeginForm("CreateRequest", "Leave", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+                                <h3 class="page-header"><i class="fa fa-list-alt"></i>Request Leave</h3>
+                                <ol class="breadcrumb">
+                                    <li><i class="fa fa-home"></i><a href="#">Home</a></li>
+                                    <li><i class="fa fa-desktop"></i>Leave</li>
+                                    <li><i class="fa fa-list-alt"></i>Request Leave</li>
+                                </ol>
+                            </div>
+                            <hr />
+                            <div class="form-horizontal">
+                                @Html.ValidationSummary(true)
+                                @if (@TempData["Success"] != null)
+                                {
+                                    <div class="alert alert-success">@TempData["Success"]</div>
+                                }
+                                @if (@ViewBag.Message != null)
+                                {
+                                    <div class="alert alert-danger">@ViewBag.Message</div>
+                                }
+                                <div style="margin-bottom:4%;"></div>
+                                <div class="form-horizontal">
+                                    @*<div style="margin-bottom:4%;"></div>
+                    <div class="form-horizontal">*@
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.leaveTypeID, "Leave Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.DropDownList("leaveTypeID", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.leaveTypeID, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.reason, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.reason, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.reason, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.startdate, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.startdate, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.startdate, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.enddate, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.enddate, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.enddate, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-10">
+                                            <input type="submit" value="Submit" class="btn btn-default" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <div>
+                            @Html.ActionLink("View Leaves", "LeaveViewModelView", "LeaveModelView", null, new { @class = "btn btn-default" })
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+    </center>
+
+
+    <script>
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("myBtn").style.display = "block";
+            } else {
+                document.getElementById("myBtn").style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+
+
+
+
+    </script>
+
+    <script type="text/javascript">
+        function readfile(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#fileUpload').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

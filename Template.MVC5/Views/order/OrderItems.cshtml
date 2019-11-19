@@ -1,0 +1,74 @@
+﻿@model IEnumerable<AbantwanaWebMaster.Model.Cart>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+@{
+    ViewBag.Title = "Order Items";
+}
+
+
+<br />
+
+    <table class="table">
+        <tr>
+            <th style="background-color: #B8DBFD;border: 1px solid #ccc">
+                @Html.DisplayNameFor(model => model.itemname)
+            </th>
+            <th style="background-color: #B8DBFD;border: 1px solid #ccc">
+                @Html.DisplayNameFor(model => model.description)
+            </th>
+            <th style="background-color: #B8DBFD;border: 1px solid #ccc">
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th style="background-color: #B8DBFD;border: 1px solid #ccc">
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th style="background-color: #B8DBFD;border: 1px solid #ccc">
+                @Html.DisplayName("Sub Total")
+            </th>
+            
+
+            <
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td style="width:120px;border: 1px solid #ccc">
+                    @Html.DisplayFor(modelItem => item.itemname)
+                </td>
+                <td style="width:120px;border: 1px solid #ccc">
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td style="width:120px;border: 1px solid #ccc">
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td style="width:120px;border: 1px solid #ccc">
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td style="width:120px;border: 1px solid #ccc">
+                   
+                    @Html.DisplayFor(modelItem => item.subTotal)
+                </td>
+                
+
+               
+               
+            </tr>
+        }
+
+    </table>
+
+
+@using (Html.BeginForm("CreatePdf", "PDF", FormMethod.Post))
+{
+    <input type="hidden" name="GridHtml" />
+    <input type="submit" id="btnSubmit" value="Create Pdf" />
+}
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").click(function () {
+            $("input[name='GridHtml']").val($("#Grid").html());
+        });
+    });
+</script>

@@ -1,0 +1,179 @@
+﻿@model IEnumerable<AbantwanaWebMaster.Model.Supplier>
+
+@{
+    ViewBag.Title = "Archived Supplier";
+}
+
+
+<html>
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        body {
+            background-size: cover;
+            /*background-image: url('../../Content200/Content/schoolgirl.jpg');*/
+            background-image: url('../../Content200/Content/cv.jpg');
+        }
+
+        table {
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial;
+            font-size: 20px;
+        }
+
+        .container {
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+            .container img {
+                vertical-align: middle;
+            }
+
+            .container .content {
+                position: absolute;
+                bottom: 1;
+                background: rgb(0, 0, 0); /* Fallback color */
+                background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+                color: #f1f1f1;
+                width: 70%;
+                padding: 3px;
+            }
+
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 18px;
+        }
+
+        h1 {
+            color: white;
+            font-weight: bold;
+        }
+
+        .w3-btn {
+            width: 150px;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
+        }
+
+        #myBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            z-index: 99;
+            font-size: 18px;
+            border: none;
+            outline: none;
+            background-color: red;
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+            #myBtn:hover {
+                background-color: #555;
+            }
+    </style>
+</head>
+<body>
+    <button onclick="topFunction()" id="myBtn" title="Go to top" style="width:5%">Top</button>
+    <div class="container">
+        <button class="w3-button w3-teal w3-round" style="width:15%"> @Html.ActionLink("Create New", "Create")</button>
+
+        <div class="content">
+            <h1>Archived Supplier</h1>
+            <table class="table">
+                <tr>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.physicaladdress)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.phonenumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.email)
+                    </th>
+                    @* <th>
+                            @Html.DisplayNameFor(model => model.archive)
+                        </th>*@
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.physicaladdress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.phonenumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.email)
+                    </td>
+                    <td>
+                        <div class="btn-group">
+                            <a class="btn btn-default" href="@Url.Action("Restore", "Suppliers", new { id=item.supplierID },null)">
+                                <span class="icon_lightbulb_alt"></span>
+                                Restore
+                            </a>
+                        </div>
+                    </td>
+
+                </tr>
+                }
+
+            </table>
+        </div>
+
+    </div>
+
+
+    <script>
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("myBtn").style.display = "block";
+            } else {
+                document.getElementById("myBtn").style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+</body>
+</html>

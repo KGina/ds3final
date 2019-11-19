@@ -1,0 +1,60 @@
+﻿@model IEnumerable<AbantwanaWebMaster.Model.Fees>
+
+@{
+    ViewBag.Title = "Fees";
+}
+
+<h2>Fees For @ViewBag.lName @ViewBag.SName</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FeeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.grade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateCreated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.feeAmount)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FeeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.grade)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateCreated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.feeAmount)
+        </td>
+        <td>
+            <div class="btn-group">
+                <a class="btn btn-success" href="@Url.Action("Create", "Payment", new { feeId=item.FeeId,na=ViewBag.lName ,s=ViewBag.SName },null)">
+                    <span class="icon_lightbulb_alt"></span>
+                    Payment
+                </a>
+            </div>
+        </td>
+        <td>
+            <div class="btn-group">
+                <a class="btn btn-primary" href="@Url.Action("PrintReport", "Payment", new { FeeId=item.FeeId },null)">
+                    <span class="icon_lightbulb_alt"></span>
+                    Generate Invoice
+                </a>
+            </div>
+        </td>
+    </tr>
+}
+
+</table>

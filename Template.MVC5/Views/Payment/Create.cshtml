@@ -1,0 +1,49 @@
+﻿@model  AbantwanaWebMaster.Model.Payment
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>New Payment</h2>
+
+
+@using (Html.BeginForm("Create", "Payment",FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    @*<h4>New Payment</h4>*@
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.feeId)
+    @*@Html.HiddenFor(model => model.le)*@
+
+    <div class="form-group">
+        <h4><b>Learner Name : @ViewBag.lName</b></h4>
+        <h4><b>Learner Surname : @ViewBag.SName</b></h4>
+        <h4><b>Transaction Code @Model.feeId</b></h4>
+     
+    </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.amountPayed, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.amountPayed, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.amountPayed, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    }
+
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

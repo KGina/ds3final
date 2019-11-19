@@ -1,0 +1,50 @@
+﻿@model IEnumerable<AbantwanaWebMaster.Model.Announcement>
+
+
+@{
+    ViewBag.Title = "AnnouncementList";
+
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content"IE="edge">
+
+
+    <!-- CSS Includes -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+    <style type="text/css">
+        .field-validation-error {
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Index</h2>
+
+        <table class="table">
+            <tr>
+                <th>
+
+                    @Html.DisplayNameFor(model => model.message)
+                </th>
+
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <!-- MvcHtmlString Html.TextArea(string name, string value, object htmlAttributes) -->
+                    <td>@Html.TextArea("Message", item.message, new { @class = "form-control" })</td>
+
+                    <td><a class="btn btn-primary" href="@Url.Action("Index", "Home")" role="button">Back</a></td>
+                </tr>
+            }
+        </table>
+</body>
+

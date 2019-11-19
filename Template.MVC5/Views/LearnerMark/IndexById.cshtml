@@ -1,0 +1,132 @@
+﻿@model AbantwanaWebMaster.Model.learnerReport
+@{
+    ViewBag.Title = "IndexById";
+    Layout = null;
+}
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+<style>
+    h3, h2 {
+        text-align: center;
+    }
+</style>
+<div>
+    @*<h2><img src="~/Images/basiceducation.jpg" alt="School Logo" style="width:500px;height:100px;"></h2>*@
+    <h2>Derpartment Of Education in Kwa-Zulu Natal</h2>
+    <h2><img src="~/Images/logo.png" alt="School Logo" style="width:200px;height:200px;"></h2>
+    <h3>Abantwana Day Care </h3>
+    <h3> 2019</h3>
+    <table class="table table-bordered table-condensed table-striped">
+        <tr>
+            <td>Learn Name :</td>
+            <td>@Model.learnerName</td>
+        </tr>
+
+        <tr>
+            <td>Learner ID :</td>
+            <td>@Model.learnerId</td>
+
+        </tr>
+        <tr>
+            <td>Term Number :</td>
+            <td>@Model.termNumber</td>
+
+        </tr>
+        <tr>
+            <td>Grade :</td>
+            <td>@Model.grade</td>
+
+        </tr>
+
+        @*<img src="img_girl.jpg" alt="Girl in a jacket" style="width:500px;height:600px;">*@
+
+    </table>
+    <table class="table table-bordered table-condensed table-striped">
+        <tr>
+            <td>
+                <table class="table table-bordered table-condensed table-striped">
+
+
+                    <tr>
+                        <td>Subject Name</td>
+                        <td>Marks</td>
+                        <td>Average</td>
+                        <td>Comments</td>
+                        @*<td>@Model.Salary</td>*@
+                    </tr>
+                    @foreach (var item in Model.learnerSubjects)
+                    {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.mark</td>
+                        <td>@item.average</td>
+                        <td>@item.comment</td>
+                        @*<td>@Model.HRA</td>*@
+                    </tr>
+                    }
+                    
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>Number Of Days Absent :</td>
+
+        </tr>
+        <tr>
+            <td>Result : @Model.results</td>
+        </tr>
+
+    </table>
+    <br>
+    <br>
+    <table class="table table-bordered table-condensed table-striped">
+        <tr>
+            <td>
+                <center>Grade Scale</center>
+            </td>
+        </tr>
+        <tr>
+
+            <td>
+                <table class="table table-bordered table-condensed table-striped">
+
+
+                    <tr>
+                        <td>Percentages</td>
+
+                        <td>Level</td>
+                        @*<td>@Model.Salary</td>*@
+                    </tr>
+                    <tr>
+                        <td>(80-100) Excellent</td>
+                        <td>A</td>
+
+                    </tr>
+                    <tr>
+                        <td>(70-79) Good</td>
+                        <td>B</td>
+
+                    </tr>
+                    <tr>
+                        <td>(60-69) Satisfactory</td>
+                        <td>C</td>
+                    </tr>
+                    <tr>
+                        <td>(50-59) Adaquate</td>
+                        <td>D</td>
+                    </tr>
+                    <tr>
+                        <td>(40-49) Poor</td>
+                        <td>E</td>
+                    </tr>
+                    <tr>
+                        <td>(0-39) Not Performed</td>
+                        <td>F</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+
+    </table>
+</div>

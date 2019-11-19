@@ -1,0 +1,21 @@
+﻿@model IEnumerable<AbantwanaWebMaster.Model.Category>
+
+
+
+//start
+//end
+
+
+
+
+
+        @foreach (var category in Model)
+        {
+
+            <p class="btn">
+                @Html.ActionLink(category.name, "Browse", "Store", new { Category = category.name }, null)
+
+                </p>
+
+         }
+

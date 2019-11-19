@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html>
+<title>All Announcements</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+@model PagedList.IPagedList<AbantwanaWebMaster.Model.Announcement>
+@using PagedList.Mvc
+@using PagedList
+
+
+<div style="margin-bottom:10%;"></div>
+
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header card-header-primary">
+            <h4 class="card-title ">
+                <i class="fa fa-home"></i><a href="#">Announcements</a>
+                <i class="fa fa-desktop"></i>All Announcements
+            </h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                <h4>     @Html.DisplayName("Create by")</h4>
+                            </th>
+
+                            <th>
+                                <h4>     @Html.DisplayName("Title")</h4>
+                            </th>
+                            <th>
+                                <h4>     @Html.DisplayName("Message")</h4>
+                            </th>
+                            <th>
+                                <h4>     @Html.DisplayName("Date Created")</h4>
+                            </th>
+                            <th>
+                                <h4>     @Html.DisplayName("Expire Date")</h4>
+                            </th>
+                            
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <h4>  @Html.DisplayFor(modelItem => item.sender)</h4>
+                                </td>
+
+                                <td>
+                                    <h4>@Html.DisplayFor(modelItem => item.title)</h4>
+                                </td>
+                                <td>
+                                    <h4>@Html.DisplayFor(modelItem => item.message)</h4>
+                                </td>
+                                <td>
+                                    <h4>@Html.DisplayFor(modelItem => item.datecreateddisplay)</h4>
+                                </td>
+                                <td>
+                                    <h4>@Html.DisplayFor(modelItem => item.expiredisplay)</h4>
+                                </td>
+                                
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<div style="text-align: center">
+    <p>
+        @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    </p>
+    <p style="margin-top: -25px">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </p>
+</div>
+
+
+
+
+<script>
+    function stripDate(ds) {
+        var d = new Date(ds),
+            y = d.getFullYear(),
+            m = addZero(d.getMonth() + 1),
+            d = addZero(d.getDate());
+        return y + '-' + m + '-' + d;
+    }
+</script>
+</html>

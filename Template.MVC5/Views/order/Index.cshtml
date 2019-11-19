@@ -1,0 +1,226 @@
+﻿<!DOCTYPE html>
+<html>
+<title>Orders </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+@model PagedList.IPagedList<AbantwanaWebMaster.Model.Order>
+@using PagedList.Mvc
+@using PagedList
+
+
+<div style="margin-bottom:10%;"></div>
+
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header card-header-primary">
+            <h4 class="card-title ">
+                <i class="fa fa-home"></i><a href="#">Order</a>
+                <i class="fa fa-desktop"></i>Order Management
+            </h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                <h4>     @Html.DisplayName("Order ID")</h4>
+                            </th>
+
+                            <th>
+                                <h4>     @Html.DisplayName("Total Cost")</h4>
+                            </th>
+                            <th>
+                                <h4>     @Html.DisplayName("Status")</h4>
+                            </th>
+                            <th>
+                                <h4>     @Html.DisplayName("Created By")</h4>
+                            </th>
+                           
+                        </tr>
+                    </thead>
+                   
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <h4>  @Html.DisplayFor(modelItem => item.OrderId)</h4>
+                                </td>
+
+                                <td>
+                                    <h4>@Html.DisplayFor(modelItem => item.TotalCost)</h4>
+                                </td>
+                                <td>
+                                    <h4>@Html.DisplayFor(modelItem => item.approval)</h4>
+                                </td> 
+                                <td>
+                                    <h4>@Html.DisplayFor(modelItem => item.creator)</h4>
+                                </td>
+                                
+
+
+                                @*<td>
+                                        @Html.DisplayFor(modelItem => item.Picture)
+                                    </td>*@
+                                @if (User.IsInRole("admin"))
+                                {
+                                <td>
+                                    <div class="btn-group">
+                                        <a class="btn btn-default" href="" >
+                                            <span class="icon_lightbulb_alt"></span>
+                                            Options
+                                        </a>
+                                        <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href=""><span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="@Url.Action("approve", "order", new { id = item.OrderId })">Approve </a></li>
+                                            @*<li><a href="">@Html.ActionLink("Details", "Details", new { id = item.LeaveID }) </a></li>*@
+                                            <li>
+
+                                                <a href="@Url.Action("reject", "order", new { id = item.OrderId })"> Reject</a>
+                                            </li>
+                                            <li>
+
+                                                <a href="@Url.Action("OrderItems", "order", new { id = item.OrderId })"> View Items</a>
+                                            </li>
+                                            <li class="divider"></li>
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Cancel</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<div style="text-align: center">
+    <p>
+        @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    </p>
+    <p style="margin-top: -25px">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </p>
+</div>
+
+
+
+
+@section scripts{
+
+
+
+    <script>
+        function stripDate(ds) {
+            var d = new Date(ds),
+                y = d.getFullYear(),
+                m = addZero(d.getMonth() + 1),
+                d = addZero(d.getDate());
+            return y + '/' + m + '/' + d;
+        }
+        function openAddEditForm(requestid) {
+            $('#reqID').val(requestid);
+            alert('my value is : ' + $('#reqID').val())
+            $.ajax({
+                type: "GET",
+                url: "/Leave/getStaffList",
+                data: { 'requestid': requestid },
+                success: function (data) {
+                    var select = document.getElementById('#ddClassRoom');
+                    $('#ddClassRoom').empty();
+                    $('#ddClassRoom').append($('<option></option>').val('').html('Select Teacher'));
+                    //For loop to get all events in database
+                    $.each(data, function (i, v) {
+
+                        $('#ddClassRoom').append($('<option></option>').val(v.staffMemberId).html(v.title));
+
+                    })
+                },
+                //Catch error of loading
+                error: function (error) {
+                    alert('Failed to Teachers!')
+                }
+
+            })
+
+        };
+        function approve(requestid) {
+            $.ajax({//Ajax is used for to call controller to get and post data.
+                type: 'POST',
+                url: '/Leave/approveLeave', //Call Controller
+                data: { 'requestid': requestid },
+                success: function (data) {
+                    if (data.status) {
+                        console.log("Data Saved");
+                        alert("Approved successful!!");
+                    }
+                    else {
+                        var r = confirm("No Teachers Available as replacement, Do you want to Update the Schedule!! ");
+                        if (r == true) {
+                            openAddEditForm(requestid);
+                            //Hides modal
+                            $('#eventClickModal').modal('hide');
+                            $('#eventAddModal').modal();
+                        }
+
+                    }
+                },
+                error: function () {
+                    alert('Failed to approve Leave!');
+                }
+            })
+        };
+        function editBtn(requestid) {
+            //Open modal window for edit form for selected event
+            approve(requestid);
+
+        };
+
+        $('#btnSave').click(function () {
+            if ($('#ddClassRoom').val() == 0) {
+                alert('Please Teacher!!')
+                return;
+            }
+            var data = {
+                staffMemberId: parseInt($('#ddClassRoom').val()),
+                requestid: $('#reqID').val()
+            }
+
+            replaceTeacher(data)
+
+        });
+        function replaceTeacher(data) {
+            $.ajax({//Ajax is used for to call controller to get and post data.
+                type: 'POST',
+                url: '/Leave/replaceTeacher', //Call Controller
+                data: data,
+                success: function (data) {
+                    if (data.status) {
+                        console.log("Data Saved");
+                        alert("Approved successful!!");
+                    }
+                    else {
+                        var r = confirm("No Teachers Available as replacement, Do you want to Update the Schedule!! ");
+                        if (r == true) {
+                            openAddEditForm(requestid);
+                            //Hides modal
+                            $('#eventClickModal').modal('hide');
+                            $('#eventAddModal').modal();
+                        }
+
+                    }
+                },
+                error: function () {
+                    alert('Failed to approve Leave!');
+                }
+            })
+        };
+    </script>
+}
+</html>

@@ -1,0 +1,123 @@
+﻿@model IEnumerable<AbantwanaWebMaster.Model.LeaveRequest>
+
+<head>
+
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="~/Content/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/css/util.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/main.css">
+    <!--===============================================================================================-->
+</head>
+
+@*<table id="customers">*@
+@*<table class="container-table100">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.requestid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.startdate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.enddate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.reason)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.approvalstatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.staffmemberId)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.requestid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.startdate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.enddate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.reason)
+            </td>
+            @*<td>
+                item.approvalstatus
+            </td>
+
+
+        </tr>
+    }
+
+</table>*@
+
+
+
+    <div class="wrap-table100">
+        <div class="table">
+
+            <div class="row header">
+                <div class="cell">
+                    @Html.DisplayNameFor(model => model.requestid)
+                </div>
+                <div class="cell">
+                    @Html.DisplayNameFor(model => model.startdate)
+                </div>
+                <div class="cell">
+                    @Html.DisplayNameFor(model => model.enddate)
+                </div>
+                <div class="cell">
+                    @Html.DisplayNameFor(model => model.reason)
+                </div>
+            </div>
+            @foreach (var item in Model)
+            {
+                <div class="row">
+                    <div class="cell" data-title=@Html.DisplayNameFor(model => model.requestid)>
+                        @Html.DisplayFor(modelItem => item.requestid)
+                    </div>
+                    <div class="cell" data-title=@Html.DisplayNameFor(model => model.startdate)>
+                        @Html.DisplayFor(modelItem => item.startdate)
+                    </div>
+                    <div class="cell" data-title=@Html.DisplayNameFor(model => model.enddate)>
+                        @Html.DisplayFor(modelItem => item.enddate)
+                    </div>
+                    <div class="cell" data-title=@Html.DisplayNameFor(model => model.reason)>
+                        @Html.DisplayFor(modelItem => item.reason)
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+
+
+
+
+    <!--===============================================================================================-->
+    <script src="~/Content/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Content/vendor/bootstrap/js/popper.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Content/vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Content/js/main.js"></script>

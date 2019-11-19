@@ -1,0 +1,71 @@
+﻿@model List< AbantwanaWebMaster.Model.LearnerAssessmentVM>
+
+@{
+    ViewBag.Title = "View Marks";
+}
+
+<h2>subject Marks </h2>
+
+   
+    <table class="table">
+        <tr>
+
+
+            <th>
+                @Html.DisplayName("Learner Name")
+            </th>
+            <th>
+                @Html.DisplayName("Surname")
+            </th>
+
+            @foreach (var item in Model)
+            {
+                foreach (var item2 in item.AssessmentNameList)
+                {
+                    <th>
+                        @Html.DisplayFor(model => item2)
+                    </th>
+
+                }
+                break;
+
+            }
+                    <th>
+                        @Html.DisplayName("Results")
+                    </th>
+        </tr>
+
+
+        @foreach (var item in Model)
+    {
+        <tr>
+
+
+           @* @Html.HiddenFor(model => item.learnerId)*@
+            @*@Html.HiddenFor(m=>item.lv.Add(item))*@
+            <td>
+                @Html.DisplayFor(model => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Surname)
+            </td>
+            @foreach (var item2 in item.LearnermarkrList)
+            {
+            <td>
+                @Html.DisplayFor(model => item2)
+            </td>
+
+            }
+            <td>
+                @Html.DisplayFor(model => item.decision)
+            </td>
+            @*<td>
+                @Html.EditorFor(model => model[i].AssessmentMark)
+            </td>*@
+
+
+        </tr>
+        }
+
+    </table>
+</div>

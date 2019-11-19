@@ -1,0 +1,75 @@
+﻿@model IEnumerable < AbantwanaWebMaster.Model.Classroom>
+
+@{
+    //Layout = null;
+    ViewBag.Title = "Print Marks";
+}
+
+<h2>Grade Reports </h2>
+
+
+  
+
+        <div class="col-md-10">
+
+            @*@Html.DisplayName("Term Number")
+            @Html.DropDownList("termId", null, htmlAttributes: new { @class = "form-control" })*@
+
+            @*@Html.ValidationMessageFor(model => model., "", new { @class = "text-danger" })*@
+        </div>
+
+        <div class="col-md-10">
+            @*@Html.DisplayNameFor(model => model.orderTypeId)*@
+            @*@Html.DropDownList("orderTypeId", null, htmlAttributes: new { @class = "form-control" })*@
+            @*@Html.ValidationMessageFor(model => model.orderTypeId, "", new { @class = "text-danger" })*@
+        </div>
+
+        <table class="table">
+            @*<tr>
+               
+                <th>
+                    @Html.DisplayNameFor(model => model.BirthCertificate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.lsurname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.lidnumber)
+                </th>
+
+               
+               
+            </tr>*@
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                   
+                    <td>
+                        @Html.DisplayFor(modelItem => item.gradename)
+                    </td>
+                    
+                    @foreach (var li in item.terms)
+                    {
+                    <td>
+                        <div class="btn-group">
+                            <a class="btn btn-default" href="@Url.Action("PrintGradeReport", "Report", new { id = item.classroomid,termId=li.termId }, null)">
+                                <span class="icon_lightbulb_alt"></span>
+                                Term @li.name Report
+                            </a>
+                        </div>
+                    </td>
+                    @*<td>
+                        <div class="btn-group">
+                            <a class="btn btn-default" href="@Url.Action("GradeReport", "Report", new { id = item.classroomid,termId=li.termId }, null)">
+                                <span class="icon_lightbulb_alt"></span>
+                                Print Report
+                            </a>
+                        </div>
+                    </td>*@
+                    }
+
+                </tr>
+            }
+
+        </table>

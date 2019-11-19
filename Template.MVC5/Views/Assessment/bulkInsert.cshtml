@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Excel Page";
+}
+
+@model AbantwanaWebMaster.Model.LearnerAssessment
+@using System.Data;
+<div class="btn-group">
+    <a class="btn btn-default" href="@Url.Action("Index", "Assessment", new { subjectId=ViewBag.subjectId,gradeId= ViewBag.gradeId,yearId=ViewBag.yearId,termId=ViewBag.termId},null)">
+        <span class="icon_lightbulb_alt"></span>
+        Assessment Lists
+    </a>
+</div>
+
+<script src="~/scripts/jquery-3.4.1.js"></script>
+
+@using (Html.BeginForm("BulkInsert", "assessment", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="info2">
+        <h2>Browse File for uploading</h2>
+        @Html.AntiForgeryToken()
+
+        @Html.HiddenFor(model => model.learnerId)
+        @Html.HiddenFor(model => model.yearId)
+        @Html.HiddenFor(model => model.assessmentId)
+        @Html.HiddenFor(model => model.classID)
+        @Html.HiddenFor(model => model.gradeid)
+        @Html.HiddenFor(model => model.subjectId)
+
+
+        <div class="form-group" name="Fichier1">
+            <!-- COMPONENT START -->
+            <div class="form-group">
+
+
+                <input type="file" name="upload" id='dataFile' class="form-control" placeholder='Choose a file...' />
+
+            </div>
+            @*<input type="file" id="dataFile" name="upload" />*@
+
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Upload" class="btn btn-default" />
+        </div>
+
+
+        <div class="alert alert-danger">
+            @Html.ValidationSummary()
+            @*<strong></strong> asdasd*@
+        </div>
+
+
+
+    </div>
+
+}

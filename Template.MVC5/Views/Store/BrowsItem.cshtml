@@ -1,0 +1,43 @@
+﻿@model IEnumerable<AbantwanaWebMaster.Model.ItemVm>
+
+@{
+    ViewBag.Title = "BrowsItem";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>BrowsItem</h2>
+
+
+<table class="table">
+    
+@foreach (var item in Model) {
+    <tr>
+        <td></td>
+        <td></td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Picture)
+        </td>*@
+        @Html.DisplayFor(modelItem => item.Title)
+        <div class="gallery">
+            <a target="_blank" href="img_5terre.jpg">
+
+
+                @{
+                    var base64 = Convert.ToBase64String(item.Picture);
+                    var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+                }
+                <a href='@Url.Action("Details", new { id = item.ItemVMId })'>
+                    <img src='@imgsrc' />
+                </a>
+
+            </a>
+            <div class="desc">  @Html.DisplayFor(modelItem => item.Price)</div>
+            @Html.DisplayFor(modelItem => item.ItemDesciption)
+
+        </div>
+
+
+    </tr>
+}
+
+</table>

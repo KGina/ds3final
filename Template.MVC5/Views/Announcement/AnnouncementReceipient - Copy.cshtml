@@ -1,0 +1,22 @@
+﻿
+
+@model IEnumerable<AbantwanaWebMaster.Model.Classroom>
+
+
+@{
+    ViewBag.Title = "Classroom";
+    Layout = null;
+}
+
+
+
+
+@foreach (var item in Model)
+{
+    <br >
+
+    @Html.ActionLink(item.gradename, "SendByStudent", new { classroomid = item.classroomid });
+    <br/>
+
+
+}

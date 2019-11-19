@@ -1,0 +1,65 @@
+﻿
+
+@model IEnumerable<AbantwanaWebMaster.Model.ClassRoom>
+
+
+@{
+    ViewBag.Title = "Classroom";
+    //Layout = null;
+}
+
+<h2>Select the Grade To Proceed With Attendance </h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Class Name")
+        </th>
+        <th>
+            @Html.DisplayName("New Record")
+        </th>
+        <th>
+            @Html.DisplayName("Existing Records")
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        @*<br>
+
+        @Html.ActionLink(item.gradename, "CreateAttendance", new { classroomid = item.classroomid });
+        @Html.ActionLink("View Attendance", "Index", new { classId = item.classroomid });
+        <br />*@
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.className)
+            </td>
+            <td>
+               @*  @Html.ActionLink("Tick Attandance", "CreateAttendance", new { classId = item.classroomid })*@
+
+                <div class="btn-group">
+                    <a class="btn btn-default" href="@Url.Action("CreateAttendance", "attend", new { classroomId =item.classRoomId },null)">
+                        <span class="icon_lightbulb_alt"></span>
+                        Mark Attandance
+                    </a>
+                </div>
+
+            </td>
+            <td>
+                <div class="btn-group">
+                    <a class="btn btn-default" href="@Url.Action("Index", "attend", new { classId=item.classRoomId },null)">
+                        <span class="icon_lightbulb_alt"></span>
+                        View Attendance
+                    </a>
+                </div>
+               @* @Html.ActionLink("View Attendance", "Index", new { classId = item.classroomid })*@
+            </td>
+
+
+        </tr>
+    }
+
+
+</table>
+    

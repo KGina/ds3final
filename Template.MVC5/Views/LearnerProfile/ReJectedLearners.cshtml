@@ -1,0 +1,96 @@
+﻿@model IEnumerable<AbantwanaWebMaster.Model.LearnerProfileView>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Learners</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Picture)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lsurname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lidnumber)
+        </th>
+        
+        <th>
+            @Html.DisplayName("Grade Applied For")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.medicalCertificate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BirthCertificate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <img src="@Url.Action("UserPhotos", "LearnerProfile", new { learnerId = item.learnerId })" height="48" width="48" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lsurname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lidnumber)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.grade)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.status)
+        </td>
+        
+
+        <td>
+            <div class="btn-group">
+                <a class="btn btn-default" href="@Url.Action("OpenPDFIdDoc", "LearnerProfile", new { id=item.learnerId },null)" >
+                    <span class="icon_lightbulb_alt"></span>
+                    View Pdf
+                </a>
+            </div>
+        </td>
+
+        
+        <td>
+            <div class="btn-group">
+                <a class="btn btn-default" href="@Url.Action("OpenPDFMedDoc", "LearnerProfile", new { id=item.learnerId },null)" >
+                    <span class="icon_lightbulb_alt"></span>
+                    View Pdf
+                </a>
+            </div>
+        </td>
+        <td>
+            <div class="btn-group">
+                <a class="btn btn-default" href="@Url.Action("arch", "LearnerProfile", new { id=item.learnerId },null)" >
+                    <span class="icon_lightbulb_alt"></span>
+                    Archive
+                </a>
+            </div>
+        </td>
+
+       
+
+        
+    </tr>
+}
+
+</table>

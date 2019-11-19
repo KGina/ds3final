@@ -1,0 +1,147 @@
+﻿@model AbantwanaWebMaster.Model.invoiceReport
+@{
+    ViewBag.Title = "Invoice";
+    Layout = null;
+}
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+
+
+
+
+<html>
+<head>
+    <style>
+        h3, h2 {
+            text-align: center;
+        }
+
+        body {
+            background-color: antiquewhite;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: black;
+        }
+
+        h3 {
+            background-color: #4CAF50;
+            color: black;
+        }
+
+        p.dashed {
+            border-style: dashed;
+        }
+    </style>
+</head>
+<body>
+
+
+    
+        <div>
+            @*<h2><img src="~/Images/basiceducation.jpg" alt="School Logo" style="width:500px;height:100px;"></h2>*@
+            
+            <img src="~/Images/logos.png" alt="School Logo" style="width:100%;height:150px;">
+
+
+
+
+
+            <table class="table table-bordered table-condensed table-striped">
+
+                <h2> <b align="right">Abantwana Invoice Report </b></h2>
+
+
+                <tr>
+                    <td>Invoice # :</td>
+                    <td>@Model.feeId</td>
+                </tr>
+                <tr>
+                    <td>Learner Name :</td>
+                    <td>@Model.learnerName</td>
+                </tr>
+
+                <tr>
+                    <td>Grade :</td>
+                    <td>@Model.grade</td>
+
+                </tr>
+                <tr>
+                    <td>Date Created :</td>
+                    <td>@Model.dateCreated</td>
+
+                </tr>
+                <tr>
+                    <td>School Fee :</td>
+                    <td>@Model.schoolfee</td>
+
+                </tr>
+
+                @*<img src="img_girl.jpg" alt="Girl in a jacket" style="width:500px;height:600px;">*@
+
+            </table>
+            <table class="table table-bordered table-condensed table-striped">
+                <tr>
+                    <td>
+                        <table class="table table-bordered table-condensed table-striped">
+
+                            <center><h4><b> Payments Made</b></h4></center>
+                            <tr>
+                                <th>Ref No.</th>
+                                <th>Date Payed</th>
+                                <th>Paid By</th>
+                                <th>Amount</th>
+
+                            </tr>
+                            @foreach (var ite in Model.payments)
+                            {
+                                <tr>
+                                    <td>@ite.pymentId</td>
+                                    <td>@ite.createdatetime</td>
+                                    <td>@ite.payer</td>
+                                    <td>R @ite.amountPayed</td>
+                                    @*<td>@Model.HRA</td>*@
+                                </tr>
+                            }
+                            
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Total Amount Payed : R @Model.totalPayed</td>
+                    
+                </tr>
+                <tr>
+                    <td>Amount Remaining : R @Model.owedAmount</td>
+
+                </tr>
+
+
+            </table>
+            <br>
+            <br>
+            
+
+        </div>
+   
+    </p>
+</body>
+</html>
+
+
+

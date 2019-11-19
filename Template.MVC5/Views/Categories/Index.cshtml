@@ -1,0 +1,133 @@
+﻿@model IEnumerable<AbantwanaWebMaster.Model.Category>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<html>
+<head>
+    @using GridMvc.Html
+    @{
+        var grid = new WebGrid(Model);
+    }
+
+    <meta name="viewport" content="width=device-width" />
+    <link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" />
+    @*@*<link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" />*@
+    <script src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/gridmvc.min.js")"></script>
+
+
+    @*<link href="~/Content/bootstrap.css" rel="stylesheet" />
+        <link href="~/Content/Gridmvc.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script src="~/Scripts/gridmvc.min.js"></script>
+
+        <link href="~/Content/viewlight.css" rel="stylesheet" />*@
+
+
+
+    <style>
+        .webgrid-table {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            font-size: 1.2em;
+            width: 100%;
+            display: table;
+            border-collapse: separate;
+            border: solid 1px #98BF21;
+            background-color: white;
+        }
+
+            .webgrid-table td, th {
+                border: 1px solid #98BF21;
+                padding: 3px 7px 2px;
+            }
+    </style>
+</head>
+<body>
+    <center>
+        <div style="background-color:whitesmoke; height:37px;width:85% ;font-size:15px;">
+
+            <h2> List of Categories  </h2>
+
+        </div>
+
+        <div class="card shadow mb-4" style="background-color:aliceblue; width:85%">
+            <div class="card-header ">
+
+                <p>
+                    <div class="btn-group">
+                        <a class="btn btn-send" href="@Url.Action("Index", "Categories")">
+                            <i class="fad fa fa-home"></i>
+                            Home
+                        </a>
+                    </div>
+                    <div class="btn-group">
+                        <a class="btn btn-success" href="@Url.Action("Create", "Categories")">
+                            <i class="fad fa-file-alt"></i>
+                            Add New Categories
+                        </a>
+                    </div>
+                    <div class="btn-group">
+                        <a class="btn btn-success" href="@Url.Action("Index", "StoreManager")">
+                            <i class="fa fa-list"></i>
+                            Items
+                        </a>
+                    </div>
+
+                </p>
+
+
+            </div>
+            <div id="gridContent" style=" padding:20px; ">
+                @grid.GetHtml(
+                        tableStyle: "webgrid-table",
+                        headerStyle: "webgrid-header",
+                        footerStyle: "webgrid-footer",
+                        alternatingRowStyle: "webgrid-alternating-row",
+                        selectedRowStyle: "webgrid-selected-row",
+                        rowStyle: "webgrid-row-style",
+                        mode: WebGridPagerModes.All,
+                        columns:
+                            grid.Columns(
+
+                                                                   ))
+                @Html.Grid(Model).Columns(columns =>
+             {
+
+              columns.Add(c => c.Name).Titled("Name").Filterable(true);
+              columns.Add(c => c.Description).Titled("Description").Filterable(true);
+
+            }).WithPaging(8).Sortable(true)
+            </div>
+        </div>
+        </div>
+
+    </center>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Gridmvc.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/gridmvc.min.js"></script>
+
+
+    <script>
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("myBtn").style.display = "block";
+            } else {
+                document.getElementById("myBtn").style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+</body>
+</html>

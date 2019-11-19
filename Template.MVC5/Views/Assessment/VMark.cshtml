@@ -1,0 +1,134 @@
+﻿@model List<AbantwanaWebMaster.Model.LearnerAssessment>
+
+@{
+    ViewBag.Title = "CaptureMark";
+}
+
+
+<html>
+<head>
+    @using GridMvc.Html
+    @{
+        var grid = new WebGrid(Model);
+    }
+
+    <meta name="viewport" content="width=device-width" />
+    <link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" />
+    @*@*<link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" />*@
+    <script src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/gridmvc.min.js")"></script>
+
+    <style>
+        .webgrid-table {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            font-size: 1.2em;
+            width: 100%;
+            display: table;
+            border-collapse: separate;
+            border: solid 1px #98BF21;
+            background-color: white;
+        }
+
+            .webgrid-table td, th {
+                border: 1px solid #98BF21;
+                padding: 3px 7px 2px;
+            }
+    </style>
+</head>
+<body>
+    <center>
+        <div style="background-color:whitesmoke; height:37px;width:85% ;font-size:15px;">
+            <h2>View Marks </h2>
+
+        </div>
+
+        <div class="card shadow mb-4" style="background-color:aliceblue; width:85%">
+            <div class="card-header ">
+
+                <div class="card shadow mb-4" style="background-color:aliceblue; width:85%">
+                   
+                    <div id="gridContent" style=" padding:20px; ">
+
+                        <table class="table table-bordered" id="dataTable" width="85" cellspacing="0" style="background-color:">
+                            <tr>
+                                <td>
+                                    <font color="black" size="4">
+                                        <b>
+                                            <i></i><a href="#">Grade @ViewBag.gradeName /</a>
+                                            <i></i>@ViewBag.year /
+                                            <i></i>Term @ViewBag.name /
+											<i></i>@ViewBag.assname
+                                        </b>
+                                    </font>
+                                </td>
+                                <td>
+
+
+                                    <a class="btn btn-success" href="@Url.Action("Index", "Assessment", new { subjectId=ViewBag.subjectId,gradeId= ViewBag.gradeId,yearId=ViewBag.yearId,termId=ViewBag.termId},null)">
+                                        <span class="fa fa-list"></span>
+                                        Assessment Lists
+                                    </a>
+                                </td>
+
+                            </tr>
+                        </table>
+
+
+                        @for (int i = 0; i < Model.Count(); i++)
+                        {
+
+
+
+                            @Html.HiddenFor(model => model[i].learnerId)
+                            @Html.HiddenFor(model => model[i].yearId)
+                            @Html.HiddenFor(model => model[i].assessmentId)
+                            @Html.HiddenFor(model => model[i].classID)
+                            @Html.HiddenFor(model => model[i].gradeid)
+                            @Html.HiddenFor(model => model[i].subjectId)
+                            @Html.HiddenFor(model => model[i].Name)
+                            @Html.HiddenFor(model => model[i].Surname)
+                        }
+
+
+                        @grid.GetHtml(
+                            tableStyle: "webgrid-table",
+                            headerStyle: "webgrid-header",
+                            footerStyle: "webgrid-footer",
+                            alternatingRowStyle: "webgrid-alternating-row",
+                            selectedRowStyle: "webgrid-selected-row",
+                            rowStyle: "webgrid-row-style",
+                            mode: WebGridPagerModes.All,
+                            columns:
+                                grid.Columns(
+
+                                                                       ))
+                        @Html.Grid(Model).Columns(columns =>
+                     {
+
+                      columns.Add(c => c.learnerId).Titled("learner Id").Filterable(true);
+                      columns.Add(c => c.Name).Titled("Surname").Filterable(true);
+                      columns.Add(c => c.Surname).Titled("Number").Filterable(false);
+                      columns.Add(c => c.AssessmentMark).Titled("Mark").Filterable(false);
+                    }).WithPaging(8).Sortable(true)
+                    </div>
+                </div>
+        </div>
+
+    </center>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Gridmvc.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/gridmvc.min.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

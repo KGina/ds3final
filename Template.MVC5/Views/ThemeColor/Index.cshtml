@@ -1,0 +1,35 @@
+﻿@model IEnumerable<AbantwanaWebMaster.Model.ThemeColor>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.colorName)
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.colorName)
+        </td>
+       
+        <td>
+            @Html.ActionLink("Edit", "ThemeColor", new { id=item.colorID }) |
+           
+            <a href= @Url.Action("Delete", "ThemeColor", new { id=item.colorID },null)> Delete</a>
+        </td>
+    </tr>
+}
+
+</table>
